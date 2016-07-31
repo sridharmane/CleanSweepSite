@@ -9,6 +9,7 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  '@angular2-material': 'vendor/@angular2-material',
   'firebase': 'vendor/firebase/firebase.js',
   'angularfire2': 'vendor/angularfire2'
 };
@@ -20,6 +21,25 @@ const packages: any = {
     main: 'angularfire2.js'
   }
 };
+// Angular2 Material components here
+const materialPkgs:string[] = [
+  'button',
+  'core',
+  'icon',
+  'input',
+  'radio',
+  'toolbar',
+  'tabs',
+  'grid-list',
+  'checkbox',
+  'sidenav',
+  'list',
+  'menu'
+];
+
+materialPkgs.forEach((pkg) => {
+  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
+});
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
@@ -42,6 +62,8 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/clean-sweep',
+  'app/manage-clean-sweep',
   /** @cli-barrel */
 ];
 
