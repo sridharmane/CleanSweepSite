@@ -1,0 +1,22 @@
+<!--<md-toolbar color="primary">Clean Sweep</md-toolbar>-->
+<md-tab-group class="demo-tab-group">
+  <md-tab>
+    <template md-tab-label>
+      <md-icon>add_circle</md-icon>Create New</template>
+    <template md-tab-content>
+      <app-create-clean-sweep></app-create-clean-sweep>
+    </template>
+  </md-tab>
+  <md-tab>
+    <template md-tab-label><md-icon>edit</md-icon>Manage</template>
+    <template md-tab-content>
+      <app-manage-clean-sweep></app-manage-clean-sweep>
+    </template>
+  </md-tab>
+
+</md-tab-group>
+<ion-tabs>
+  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="About" tabIcon="information-circle"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>
+</ion-tabs>

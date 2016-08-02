@@ -24,6 +24,7 @@ const packages: any = {
 // Angular2 Material components here
 const materialPkgs:string[] = [
   'button',
+  'card',
   'core',
   'icon',
   'input',
@@ -64,6 +65,8 @@ const barrels: string[] = [
   'app/shared',
   'app/clean-sweep',
   'app/manage-clean-sweep',
+  'app/create-clean-sweep',
+  'app/tabs-clean-sweep',
   /** @cli-barrel */
 ];
 
