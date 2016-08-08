@@ -67,6 +67,9 @@ const barrels: string[] = [
   'app/manage-clean-sweep',
   'app/create-clean-sweep',
   'app/tabs-clean-sweep',
+  'app/add-partner',
+  'app/list-partners',
+  'app/partner-categories',
   /** @cli-barrel */
 ];
 

@@ -1,1 +1,16 @@
-<h2>ASDASD</h2>
+<md-toolbar class="toolbar-background" color="primary">
+  <span class="fill-remaining-space">Manage Clean Sweep</span>
+  <button md-icon-button color="secondary">
+        <md-icon class="md-48">add</md-icon>
+    </button>
+</md-toolbar>
+<md-card class="card-partner-categories">
+  <md-card-content>
+    <md-list dense>
+      <div *ngFor="let cleanSweep of cleanSweeps">
+        <!--<h3 md-subheader>{{cleanSweep.$value}}</h3>-->
+        <md-divider></md-divider>
+      </div>
+    </md-list>
+  </md-card-content>
+</md-card>

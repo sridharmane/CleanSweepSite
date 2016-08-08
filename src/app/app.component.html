@@ -1,31 +1,23 @@
 <md-toolbar class="toolbar-background" color="primary">
   <button md-icon-button color="secondary">
         <md-icon class="md-48">menu_vert</md-icon>
-    </button>
-  <md-menu>
-    <button md-menu-item>Refresh</button>
-    <button md-menu-item>Settings</button>
-  </md-menu>
+    </button> Clean Sweep Buffalo
 </md-toolbar>
+<md-grid-list cols="2">
+  <md-grid-tile [colspan]="2" [rowspan]="1" [style.background]="'lightblue'">
+    <app-add-clean-sweep class="full-width margin"></app-add-clean-sweep>
+  </md-grid-tile>
+  <md-grid-tile [colspan]="2" [rowspan]="1" [style.background]="'lightblue'">
+    <app-manage-clean-sweep class="full-width margin"></app-manage-clean-sweep>
+  </md-grid-tile>
+  <md-grid-tile [style.background]="'orange'">
+    <app-partners class="full-width margin"></app-partners>
+  </md-grid-tile>
+  <md-grid-tile [style.background]="'yellow'">
+    <app-partner-categories class="full-width margin"></app-partner-categories>
+  </md-grid-tile>
+</md-grid-list>
 
-<md-card class="demo-card demo-basic">
-  <md-card-content>
-    <app-tabs-clean-sweep></app-tabs-clean-sweep>
-  </md-card-content>
-</md-card>
-
-<md-card>
-  <!--<md-list>
-    <h3 md-subheader>Items</h3>
-    <md-list-item *ngFor="let item of streetAddresses">
-      {{item.houseNumber}}, {{item.address}}
-    </md-list-item>
-  </md-list>
-  <md-list dense>
-    <h3 md-subheader>Today</h3>
-    <md-list-item *ngFor="let message of streetAddresses">
-      <h4 md-line>{{message.houseNumber}}</h4>
-      <p md-line> {{message.address}} </p>
-    </md-list-item>
-  </md-list>-->
-</md-card>
+<button md-fab class="fab-button">
+    <md-icon class="md-24">event</md-icon>
+</button>

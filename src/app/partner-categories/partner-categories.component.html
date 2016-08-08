@@ -1,0 +1,24 @@
+<md-toolbar class="toolbar-background" color="primary">
+  <span class="fill-remaining-space">Partner Categories</span>
+  <button md-icon-button color="secondary">
+        <md-icon class="md-48">add</md-icon>
+    </button>
+</md-toolbar>
+<md-card>
+  <md-card-subtitle>Manage all Clean Sweep Partner Categories here</md-card-subtitle>
+  <md-card-content>
+    <md-list>
+      <md-list-item>
+        <md-input placeholder="Category" type="text" name="newCat" [(ngModel)]="newCat"></md-input>
+        <button md-button (click)="addCategory()" color="primary">Add New</button>
+        <button md-button (click)="addCategory()" color="warn">Cancel</button>
+      </md-list-item>
+    </md-list>
+    <md-list dense>
+      <div *ngFor="let category of partnerCategories">
+        <h3 md-subheader>{{category.$value}}</h3>
+        <md-divider></md-divider>
+      </div>
+    </md-list>
+  </md-card-content>
+</md-card>
