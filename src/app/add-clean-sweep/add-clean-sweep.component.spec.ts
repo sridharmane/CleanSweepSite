@@ -6,7 +6,7 @@ import { addProviders, async, inject } from '@angular/core/testing';
 import { AddCleanSweepComponent } from './add-clean-sweep.component';
 import { DataService } from '../data.service';
 
-describe('Component: CreateCleanSweep', () => {
+describe('Component: AddCleanSweep', () => {
   it('should create an instance', () => {
     let ds: DataService;
     let component = new AddCleanSweepComponent(ds);

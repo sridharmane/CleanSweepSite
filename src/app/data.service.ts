@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { CleanSweep } from './clean-sweep';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import {PartnerData } from './partner';
@@ -9,7 +9,7 @@ export class DataService {
   partners: FirebaseListObservable<Array<any>>;
   partnerCategories: FirebaseListObservable<Array<any>>;
 
-  constructor(af: AngularFire) {
+  constructor(@Inject(AngularFire) af: AngularFire) {
     this.cleanSweeps = af.database.list('/cleanSweeps');
     this.partners = af.database.list('/partners');
     this.partnerCategories = af.database.list('/partnerCategories');

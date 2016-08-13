@@ -1,22 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
-import { PartnerKeysPipe } from '../partner-keys.pipe';
-import { PartnerCategoriesPipe } from '../partner-categories.pipe';
-import { PartnerData } from '../partner';
-
-import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
-import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
-import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
-import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
-import {MD_TOOLBAR_DIRECTIVES} from '@angular2-material/toolbar';
+import {Component, OnInit, Inject} from '@angular/core';
+import {DataService} from '../data.service';
+import {PartnerKeysPipe} from '../partner-keys.pipe';
+import {PartnerCategoriesPipe} from '../partner-categories.pipe';
+import {PartnerData} from '../partner';
 
 
 @Component({
   moduleId: module.id,
   selector: 'app-partners',
-  directives: [MD_CARD_DIRECTIVES, MD_LIST_DIRECTIVES, MdIcon, MD_BUTTON_DIRECTIVES, MD_INPUT_DIRECTIVES, MD_TOOLBAR_DIRECTIVES],
-  providers: [MdIconRegistry],
   pipes: [PartnerKeysPipe, PartnerCategoriesPipe],
   templateUrl: 'partners.component.html',
   styleUrls: ['partners.component.css']
@@ -28,7 +19,7 @@ export class PartnersComponent implements OnInit {
 
   newPartner: PartnerData;
 
-  constructor(private ds: DataService) {
+  constructor(@Inject(DataService) private ds: DataService) {
     ds.partners.subscribe((partners) => {
       // console.log(partners);
       this.partners = partners;

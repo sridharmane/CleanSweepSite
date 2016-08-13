@@ -1,25 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { DataService } from '../data.service';
-import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
-import { MD_BUTTON_DIRECTIVES, MdButton } from '@angular2-material/button';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
-import { MD_LIST_DIRECTIVES } from '@angular2-material/list/list';
-import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 
 
 @Component({
-  moduleId: module.id,
+  // moduleId: module.id,
   selector: 'app-add-clean-sweep',
-  directives: [
-    MD_INPUT_DIRECTIVES,
-    MD_BUTTON_DIRECTIVES,
-    MdIcon,
-    MD_LIST_DIRECTIVES,
-    MdButton,
-    MD_TOOLBAR_DIRECTIVES
-  ],
-  providers: [MdIconRegistry],
-  templateUrl: 'add-clean-sweep.component.html',
+  templateUrl: './add-clean-sweep.component.html',
   styleUrls: ['add-clean-sweep.component.css']
 })
 export class AddCleanSweepComponent implements OnInit {
@@ -34,11 +20,8 @@ export class AddCleanSweepComponent implements OnInit {
   startTime: Date = new Date();
   endTime: Date = new Date();
 
-  // constructor(private cdRef: ChangeDetectorRef) {
-  //   this.addStreet();
-  // }
-  constructor(ds: DataService) {
-  this.addStreet();
+  constructor(@Inject(DataService) ds: DataService) {
+    this.addStreet();
   }
 
   ngOnInit() {

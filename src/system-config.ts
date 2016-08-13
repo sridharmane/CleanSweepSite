@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 // SystemJS configuration file, see links for more information
 // https://github.com/systemjs/systemjs
@@ -19,27 +19,37 @@ const packages: any = {
   angularfire2: {
     defaultExtension: 'js',
     main: 'angularfire2.js'
+  },
+  '@angular2-material': {
+    defaultExtension: 'js'
   }
 };
 // Angular2 Material components here
-const materialPkgs:string[] = [
+const materialPkgs: string[] = [
+  'all',
   'button',
   'card',
-  'core',
+  'checkbox',
+  'dialog',
+  'grid-list',
   'icon',
   'input',
-  'radio',
-  'toolbar',
-  'tabs',
-  'grid-list',
-  'checkbox',
-  'sidenav',
   'list',
-  'menu'
+  'menu',
+  'progress-bar',
+  'progress-circle',
+  'radio',
+  'sidenav',
+  'slider',
+  'slide-toggle',
+  'button-toggle',
+  'tabs',
+  'toolbar',
+  'tooltip',
 ];
 
 materialPkgs.forEach((pkg) => {
-  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
+  packages[`@angular2-material/${pkg}`] = { main: `${pkg}.js` };
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,7 +75,7 @@ const barrels: string[] = [
   'app/shared',
   'app/clean-sweep',
   'app/manage-clean-sweep',
-  'app/create-clean-sweep',
+  'app/add-clean-sweep',
   'app/tabs-clean-sweep',
   'app/add-partner',
   'app/list-partners',

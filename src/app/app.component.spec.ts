@@ -2,9 +2,12 @@
 
 import { addProviders, async, inject } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+// import { DataService } from './data.service';
+// import { GeocodingService } from './geocoding.service';
 
 describe('App: CleanSweepSite', () => {
   beforeEach(() => {
+    // addProviders([AppComponent, DataService, GeocodingService]);
     addProviders([AppComponent]);
   });
 

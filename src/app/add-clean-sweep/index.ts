@@ -1,1 +1,1 @@
-export * from './create-clean-sweep.component';
+export * from './add-clean-sweep.component';

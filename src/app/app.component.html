@@ -1,23 +1,36 @@
-<md-toolbar class="toolbar-background" color="primary">
-  <button md-icon-button color="secondary">
+<md-sidenav-layout>
+  <md-sidenav #start (open)="mybutton.focus()">
+    Start Sidenav.
+    <br>
+    <button md-button #mybutton (click)="start.close()">Close</button>
+  </md-sidenav>
+  <md-sidenav #end align="end">
+    End Sidenav.
+    <button md-button (click)="end.close()">Close</button>
+  </md-sidenav>
+<router-outlet></router-outlet>
+
+  <!--<md-toolbar class="toolbar-background" color="primary">
+    <button md-icon-button color="secondary" (click)="start.open()">
         <md-icon class="md-48">menu_vert</md-icon>
     </button> Clean Sweep Buffalo
-</md-toolbar>
-<md-grid-list cols="2">
-  <md-grid-tile [colspan]="2" [rowspan]="1" [style.background]="'lightblue'">
-    <app-add-clean-sweep class="full-width margin"></app-add-clean-sweep>
-  </md-grid-tile>
-  <md-grid-tile [colspan]="2" [rowspan]="1" [style.background]="'lightblue'">
-    <app-manage-clean-sweep class="full-width margin"></app-manage-clean-sweep>
-  </md-grid-tile>
-  <md-grid-tile [style.background]="'orange'">
-    <app-partners class="full-width margin"></app-partners>
-  </md-grid-tile>
-  <md-grid-tile [style.background]="'yellow'">
-    <app-partner-categories class="full-width margin"></app-partner-categories>
-  </md-grid-tile>
-</md-grid-list>
+  </md-toolbar>
+  <md-grid-list cols="2">
+    <md-grid-tile [colspan]="2" [rowspan]="1">
+      <app-add-clean-sweep class="occupy-container"></app-add-clean-sweep>
+    </md-grid-tile>
+    <md-grid-tile [colspan]="2" [rowspan]="1">
+      <app-manage-clean-sweep class="occupy-container"></app-manage-clean-sweep>
+    </md-grid-tile>
+    <md-grid-tile>
+      <app-partners class="occupy-container"></app-partners>
+    </md-grid-tile>
+    <md-grid-tile>
+      <app-partner-categories class="occupy-container"></app-partner-categories>
+    </md-grid-tile>
+  </md-grid-list>
 
-<button md-fab class="fab-button">
+  <button md-fab class="main-fab-button">
     <md-icon class="md-24">event</md-icon>
-</button>
+</button>-->
+</md-sidenav-layout>

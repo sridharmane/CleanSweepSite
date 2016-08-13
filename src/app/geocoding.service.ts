@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 
@@ -105,7 +105,7 @@ export class GeocodingService {
 
 
 
-  constructor(af: AngularFire) {
+  constructor(@Inject(AngularFire) af: AngularFire) {
     this.streetAddresses = af.database.list('streetAddresses');
   }
 
