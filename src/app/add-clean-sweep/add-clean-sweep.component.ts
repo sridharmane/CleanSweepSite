@@ -3,7 +3,6 @@ import { DataService } from '../data.service';
 
 
 @Component({
-  // moduleId: module.id,
   selector: 'app-add-clean-sweep',
   templateUrl: './add-clean-sweep.component.html',
   styleUrls: ['add-clean-sweep.component.css']

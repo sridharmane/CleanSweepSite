@@ -3,10 +3,9 @@ import { Component} from '@angular/core';
 import { DataService } from './data.service';
 import {GeocodingService} from './geocoding.service';
 import { CleanSweep } from './clean-sweep';
-
+import 'hammerjs';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

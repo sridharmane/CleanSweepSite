@@ -3,11 +3,10 @@ import {DataService} from '../data.service';
 import {PartnerData} from '../partner';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-partner-categories',
   pipes: [],
   templateUrl: 'partner-categories.component.html',
-  styleUrls: ['partner-categories.component.css']
+  styleUrls: ['partner-categories.component.scss']
 })
 export class PartnerCategoriesComponent implements OnInit {
   partners: any[];

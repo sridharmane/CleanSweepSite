@@ -6,11 +6,10 @@ import {PartnerData} from '../partner';
 
 
 @Component({
-  moduleId: module.id,
   selector: 'app-partners',
   pipes: [PartnerKeysPipe, PartnerCategoriesPipe],
   templateUrl: 'partners.component.html',
-  styleUrls: ['partners.component.css']
+  styleUrls: ['partners.component.scss']
 })
 export class PartnersComponent implements OnInit {
   partners: any[];

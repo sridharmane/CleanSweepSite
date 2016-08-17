@@ -8,7 +8,9 @@
     End Sidenav.
     <button md-button (click)="end.close()">Close</button>
   </md-sidenav>
-<router-outlet></router-outlet>
+<router-outlet>
+  {{title}}
+</router-outlet>
 
   <!--<md-toolbar class="toolbar-background" color="primary">
     <button md-icon-button color="secondary" (click)="start.open()">

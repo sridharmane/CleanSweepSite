@@ -2,10 +2,9 @@ import { Component, OnInit, Inject} from '@angular/core';
 import { DataService } from '../data.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-manage-clean-sweep',
   templateUrl: 'manage-clean-sweep.component.html',
-  styleUrls: ['manage-clean-sweep.component.css']
+  styleUrls: ['manage-clean-sweep.component.scss']
 })
 export class ManageCleanSweepComponent implements OnInit {
 

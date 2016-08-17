@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-
+import * as firebase from 'firebase';
 
 @Injectable()
 export class GeocodingService {
