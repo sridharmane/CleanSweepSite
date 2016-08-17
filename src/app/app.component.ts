@@ -18,30 +18,13 @@ export class AppComponent {
   streetAddresses: Array<any>;
 
   cleanSweep: Array<CleanSweep>;
-  constructor(){
-    
+  constructor() {
+
   }
   // constructor(private gs: GeocodingService, private ds: DataService) {
   //   gs.streetAddresses.subscribe((sa) => {
   //     this.streetAddresses = sa;
   //     console.log(sa);
-  //   });
-  // }
-
-  // addPartner() {
-  //   this.ds.addPartner({
-  //     name: 'Fire Brigade',
-  //     category: 'Safety',
-  //     keys: [
-  //       {
-  //         name: 'CR',
-  //         name_full: 'Care Referrals'
-  //       },
-  //       {
-  //         name: 'FC',
-  //         name_full: 'Fire Check'
-  //       }
-  //     ]
   //   });
   // }
 
