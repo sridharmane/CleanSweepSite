@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { CleanSweep } from './clean-sweep';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import {PartnerData } from './partner';
+import {PartnerData } from '../types/partner';
 
 @Injectable()
 export class DataService {

@@ -1,31 +1,64 @@
+body {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 
-.demo {
-  display: flex;
-  flex-flow: row wrap;
-
-  md-list, md-nav-list {
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    width: 350px;
-    margin: 20px 20px 0 0;
-
-  }
-  h2 {
-    margin-top: 20px;
+  // Helps fonts on OSX looks more consistent with other systems
+  // Isn't currently in button styles due to performance concerns
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  md-icon {
-    color: rgba(0, 0, 0, 0.12);
+  
+
+  .demo-content {
+    padding: 32px;
   }
 
-  [md-list-icon] {
-    color: white;
-    background: rgba(0, 0, 0, 0.3);
+  md-toolbar {
+    md-icon {
+      cursor: pointer;
+    }
+
+    .demo-toolbar {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  h1 {
+    font-size: 20px;
   }
 }
 
 .demo-secondary-text {
   color: rgba(0, 0, 0, 0.54);
 }
+.sidenav-main {
+    min-width: 25%;
+
+    [md-button] {
+      width: 100%;
+      position: relative;
+      bottom: 0;
+      margin: 24px 0;
+    }
+  }
+.toolbar-main{
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    -webkit-transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: box-shadow;
+    display: block;
+    position: relative;
+    // padding: 24px;
+    border-radius: 2px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    // background: white;
+    color: black;
+}
+
+///MINE
 .main-fab-button{
     position: fixed;
     right: 0;

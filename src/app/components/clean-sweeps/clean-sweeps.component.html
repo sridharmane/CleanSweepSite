@@ -1,0 +1,27 @@
+<p>
+  clean-sweeps works!
+</p>
+<md-toolbar color="primary">
+  <span class="fill-remaining-space">Clean Sweeps</span>
+  <button md-icon-button [md-menu-trigger-for]="menu">
+    
+   <md-icon>more_vert</md-icon>
+   </button>
+</md-toolbar>
+<md-grid-list cols="1" [style.background]="'lightblue'" rowHeight="16:9" gutterSize="5px">
+  <md-grid-tile>
+    <app-add-clean-sweep class="width-50"></app-add-clean-sweep>
+  </md-grid-tile>
+  <md-grid-tile>
+    <app-manage-clean-sweep class="width-50"></app-manage-clean-sweep>
+  </md-grid-tile>
+</md-grid-list>
+<!-- menu opens when trigger button is clicked -->
+
+
+<md-menu #menu="mdMenu" x-position="before">
+  <button md-menu-item> Refresh </button>
+  <button md-menu-item> Settings </button>
+  <button md-menu-item> Help </button>
+  <button md-menu-item disabled> Sign Out </button>
+</md-menu>

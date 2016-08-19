@@ -1,4 +1,4 @@
-import { StreetAddress } from './street-address';
+import { StreetAddress } from '../types/street-address';
 
 export class CleanSweep {
 

@@ -1,21 +1,26 @@
 import {Component, OnInit, Inject} from '@angular/core';
-import {DataService} from '../data.service';
-import {PartnerData} from '../partner';
+import {DataService} from '../../services/data.service';
+import {PartnerKeysPipe} from '../../pipes/partner-keys.pipe';
+import {PartnerCategoriesPipe} from '../../pipes/partner-categories.pipe';
+import {PartnerData} from '../../types/partner';
+
 
 @Component({
-  selector: 'app-partner-categories',
-  pipes: [],
-  templateUrl: 'partner-categories.component.html',
-  styleUrls: ['partner-categories.component.scss']
+  selector: 'app-partners',
+  pipes: [PartnerKeysPipe, PartnerCategoriesPipe],
+  templateUrl: 'partners.component.html',
+  styleUrls: [
+    'partners.component.scss'
+  ]
 })
-export class PartnerCategoriesComponent implements OnInit {
+export class PartnersComponent implements OnInit {
   partners: any[];
-  partnerCategories: any;
+  partnerCategories: any[];
   newCat: string = '';
 
   newPartner: PartnerData;
 
-  constructor(@Inject(DataService) private ds: DataService) {
+  constructor( @Inject(DataService) private ds: DataService) {
     ds.partners.subscribe((partners) => {
       // console.log(partners);
       this.partners = partners;

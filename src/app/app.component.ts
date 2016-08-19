@@ -1,30 +1,22 @@
-// import { Component } from '@angular/core';
 import { Component} from '@angular/core';
-import { DataService } from './data.service';
-import {GeocodingService} from './geocoding.service';
-import { CleanSweep } from './clean-sweep';
+
 import 'hammerjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: [
+    './app.component.scss'
+  ]
 })
 
 
 export class AppComponent {
-  title = 'app works!';
+  title = 'Home';
   streetAddresses: Array<any>;
 
-  cleanSweep: Array<CleanSweep>;
+  // cleanSweep: Array<CleanSweep>;
   constructor() {
 
   }
-  // constructor(private gs: GeocodingService, private ds: DataService) {
-  //   gs.streetAddresses.subscribe((sa) => {
-  //     this.streetAddresses = sa;
-  //     console.log(sa);
-  //   });
-  // }
-
 }

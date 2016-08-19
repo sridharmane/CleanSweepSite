@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject} from '@angular/core';
-import { DataService } from '../data.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-manage-clean-sweep',

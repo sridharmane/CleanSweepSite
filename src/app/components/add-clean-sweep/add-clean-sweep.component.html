@@ -1,0 +1,68 @@
+<md-card>
+  <md-toolbar class="toolbar-background" color="">
+    <span class="fill-remaining-space">Add Clean Sweep</span>
+  </md-toolbar>
+  <md-card-content>
+    <form>
+      <md-input class="demo-full-width" placeholder="Clean Sweep Number (disabled)" disabled value="Google">
+      </md-input>
+
+      <table style="width: 100%" cellspacing="0"><tr>
+        <td><md-input placeholder="First name" style="width: 100%"></md-input></td>
+        <td><md-input placeholder="Long Last Name That Will Be Truncated" style="width: 100%"></md-input></td>
+      </tr></table>
+      <p>
+        <md-input class="demo-full-width" placeholder="Address" value="1600 Amphitheatre Pkway"></md-input>
+        <md-input class="demo-full-width" placeholder="Address 2"></md-input>
+      </p>
+      <table style="width: 100%" cellspacing="0"><tr>
+        <td><md-input class="demo-full-width" placeholder="City"></md-input></td>
+        <td><md-input class="demo-full-width" placeholder="State"></md-input></td>
+        <td><md-input #postalCode class="demo-full-width" maxLength="5"
+                      placeholder="Postal Code"
+                      value="94043">
+          <md-hint align="end">{{postalCode.characterCount}} / 5</md-hint>
+        </md-input></td>
+      </tr></table>
+    </form>
+    <form>
+      <h2>Clean Sweep {{cleanSweepNumber}}</h2>
+      <md-list>
+        <h3>
+          <md-icon>date_range</md-icon>When</h3>
+        <!--<md-divider></md-divider>-->
+
+        <md-list-item>
+          <md-input placeholder="Date" type="date" name="date" [(ngModel)]="date"></md-input>
+        </md-list-item>
+        <md-list-item>
+          <md-input placeholder="From Time" type="time" name="startTime" [(ngModel)]="startTime"></md-input>
+        </md-list-item>
+        <md-list-item>
+          <md-input placeholder="End Time" type="time" name="endTime" [(ngModel)]="endTime"></md-input>
+        </md-list-item>
+
+        <md-divider></md-divider>
+
+        <h3>
+          <md-icon>location_on</md-icon>Where</h3>
+
+        <md-list-item *ngFor="let street of streets">
+          <button md-icon-button (click)="addStreet()">
+          <md-icon class="md-24">add_circle</md-icon>
+      </button>
+
+          <md-input placeholder="Street Name" type="text" name="streetName"></md-input>
+          <md-input placeholder="House# Start" type="number" name="streetNumbersStart"></md-input>
+          <md-input placeholder="House# End" type="number" name="streetNumbersEnd"></md-input>
+          <!--<input placeholder="csv file" type="file" name="streetNumbers" />-->
+        </md-list-item>
+      </md-list>
+
+    </form>
+  </md-card-content>
+  <md-card-actions>
+    <button md-button color="primary">ADD</button>
+    <button md-button color="warn">CANCEL</button>
+  </md-card-actions>
+</md-card>
