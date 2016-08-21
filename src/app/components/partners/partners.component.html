@@ -32,7 +32,8 @@
       </md-list-item>
     </md-list>
     <md-list dense>
-      <div *ngFor="let category of partners | partnerCategories">
+      <!--<div *ngFor="let category of partners | partnerCategories">-->
+        <div *ngFor="let category of partners | async | partnerCategories">
         <h3 md-subheader class="category">{{category.name}}</h3>
         <md-list-item *ngFor="let partner of category.partners">
 

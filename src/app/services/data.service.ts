@@ -1,21 +1,21 @@
-import { Injectable, Inject } from '@angular/core';
-import { CleanSweep } from './clean-sweep';
+import { Injectable } from '@angular/core';
+import { CleanSweep } from '../types/clean-sweep';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import {PartnerData } from '../types/partner';
+import { Partner } from '../types/partner';
 
 @Injectable()
 export class DataService {
-  cleanSweeps: FirebaseListObservable<Array<CleanSweep>>;
-  partners: FirebaseListObservable<Array<any>>;
-  partnerCategories: FirebaseListObservable<Array<any>>;
+  cleanSweeps: FirebaseListObservable<any[]>;
+  partners: FirebaseListObservable<any[]>;
+  partnerCategories: FirebaseListObservable<any[]>;
 
-  constructor(@Inject(AngularFire) af: AngularFire) {
+  constructor(private af: AngularFire) {
     this.cleanSweeps = af.database.list('/cleanSweeps');
     this.partners = af.database.list('/partners');
     this.partnerCategories = af.database.list('/partnerCategories');
   }
-  createCleanSweep(newName: string) {
-    this.cleanSweeps.push({ text: newName });
+  createCleanSweep(cleanSweep: CleanSweep) {
+    this.cleanSweeps.push(cleanSweep);
   }
   updateCleanSweep(key: string, newSize: string) {
     this.cleanSweeps.update(key, { size: newSize });
@@ -23,7 +23,7 @@ export class DataService {
   deleteCleanSweep(key: string) {
     this.cleanSweeps.remove(key);
   }
-  addPartner(pd: PartnerData) {
+  addPartner(pd: Partner) {
     pd.keys.push({
       name: 'notes',
       name_full: 'notes',

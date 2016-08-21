@@ -1,8 +1,9 @@
-import {Component, OnInit, Inject} from '@angular/core';
-import {DataService} from '../../services/data.service';
-import {PartnerKeysPipe} from '../../pipes/partner-keys.pipe';
-import {PartnerCategoriesPipe} from '../../pipes/partner-categories.pipe';
-import {PartnerData} from '../../types/partner';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
+import { PartnerKeysPipe } from '../../pipes/partner-keys.pipe';
+import { PartnerCategoriesPipe } from '../../pipes/partner-categories.pipe';
+import { Partner } from '../../types/partner';
+import { FirebaseListObservable } from 'angularfire2';
 
 
 @Component({
@@ -14,17 +15,18 @@ import {PartnerData} from '../../types/partner';
   ]
 })
 export class PartnersComponent implements OnInit {
-  partners: any[];
+  partners: FirebaseListObservable<any[]>;
   partnerCategories: any[];
   newCat: string = '';
 
-  newPartner: PartnerData;
+  newPartner: Partner;
 
-  constructor( @Inject(DataService) private ds: DataService) {
-    ds.partners.subscribe((partners) => {
-      // console.log(partners);
-      this.partners = partners;
-    });
+  constructor(private ds: DataService) {
+    // this.partners = ds.partners.subscribe((partners) => {
+    //   // console.log(partners);
+    //   this.partners = partners;
+    // });
+    this.partners = ds.partners;
     ds.partnerCategories.subscribe((partnerCategories) => {
       console.log('PC', partnerCategories);
       this.partnerCategories = partnerCategories;

@@ -1,24 +1,17 @@
-<p>
-  clean-sweeps works!
-</p>
 <md-toolbar color="primary">
   <span class="fill-remaining-space">Clean Sweeps</span>
   <button md-icon-button [md-menu-trigger-for]="menu">
-    
    <md-icon>more_vert</md-icon>
    </button>
+  <button md-icon-button (click)="showAddNew = true">
+   <md-icon>add</md-icon>
+   </button>
 </md-toolbar>
-<md-grid-list cols="1" [style.background]="'lightblue'" rowHeight="16:9" gutterSize="5px">
-  <md-grid-tile>
-    <app-add-clean-sweep class="width-50"></app-add-clean-sweep>
-  </md-grid-tile>
-  <md-grid-tile>
-    <app-manage-clean-sweep class="width-50"></app-manage-clean-sweep>
-  </md-grid-tile>
-</md-grid-list>
-<!-- menu opens when trigger button is clicked -->
 
-
+<div class="content" >
+    <app-add-clean-sweep class="component width-50" *ngIf="showAddNew" (addCleanSweepEvents)="eventsReceived($event)"></app-add-clean-sweep>
+    <app-manage-clean-sweep class="component width-50"></app-manage-clean-sweep>
+</div>
 <md-menu #menu="mdMenu" x-position="before">
   <button md-menu-item> Refresh </button>
   <button md-menu-item> Settings </button>

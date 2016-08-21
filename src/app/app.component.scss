@@ -13,6 +13,19 @@ body {
   .demo-content {
     padding: 32px;
   }
+md-card{
+  padding: 0;
+  background-color: green;
+  md-toolbar{
+    width: 100%;
+    padding-left: 24px;
+  }
+  
+  md-card-content{
+    padding: 24px;
+  }
+
+}
 
   md-toolbar {
     md-icon {

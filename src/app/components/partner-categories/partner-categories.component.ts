@@ -1,6 +1,6 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import {DataService} from '../../services/data.service';
-import {PartnerData} from '../../types/partner';
+import {Partner} from '../../types/partner';
 
 @Component({
   selector: 'app-partner-categories',
@@ -13,9 +13,9 @@ export class PartnerCategoriesComponent implements OnInit {
   partnerCategories: any;
   newCat: string = '';
 
-  newPartner: PartnerData;
+  newPartner: Partner;
 
-  constructor(@Inject(DataService) private ds: DataService) {
+  constructor(private ds: DataService) {
     ds.partners.subscribe((partners) => {
       // console.log(partners);
       this.partners = partners;

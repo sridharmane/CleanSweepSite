@@ -4,13 +4,20 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-clean-sweeps',
   templateUrl: 'clean-sweeps.component.html',
-  styleUrls: ['clean-sweeps.component.scss']
+  styleUrls: ['clean-sweeps.component.scss'],
 })
 export class CleanSweepsComponent implements OnInit {
+  showAddNew = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+  eventsReceived(event) {
+    if (['added', 'cancelled'].indexOf(event) > -1) {
+      this.showAddNew = false;
+    }
+
   }
 
 }

@@ -39,12 +39,6 @@ import { AddCleanSweepComponent } from './components/add-clean-sweep';
 import { ManageCleanSweepComponent } from './components/manage-clean-sweep';
 import { PartnersComponent } from './components/partners';
 import { PartnerCategoriesComponent } from './components/partner-categories';
-
-
-
-
-
-
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CleanSweepsComponent } from './components/clean-sweeps/clean-sweeps.component';
@@ -52,7 +46,6 @@ import { CleanSweepsComponent } from './components/clean-sweeps/clean-sweeps.com
  * Services 
  * */
 import {GeocodingService} from './services/geocoding.service';
-import {FirebaseDBService} from './services/firebase-db.service';
 import {DataService} from './services/data.service';
 import {DateTimeService} from './services/date-time.service';
 
@@ -101,7 +94,6 @@ const firebaseConfig = {
   providers: [
     appRoutingProviders,
     GeocodingService,
-    FirebaseDBService,
     DataService,
     DateTimeService,
   ],

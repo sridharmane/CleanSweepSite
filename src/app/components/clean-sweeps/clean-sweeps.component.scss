@@ -7,3 +7,15 @@
     width: 50%;
     margin: 0 auto;
 }
+.content{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex-basis: 50%;
+  
+  .component{
+    width:50%;
+    min-width: 350px;
+    margin: 16px auto; 
+  }
+}

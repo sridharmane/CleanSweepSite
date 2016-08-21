@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { FirebaseListObservable } from 'angularfire2';
 
 @Component({
   selector: 'app-manage-clean-sweep',
@@ -8,14 +9,17 @@ import { DataService } from '../../services/data.service';
 })
 export class ManageCleanSweepComponent implements OnInit {
 
-  cleanSweeps: any;
+  cleanSweeps: FirebaseListObservable<any[]>;
 
-  constructor(@Inject(DataService) ds: DataService) {
-    ds.cleanSweeps.subscribe((cleanSweeps) => {
-      this.cleanSweeps = cleanSweeps;
-    });
+
+
+  constructor(ds: DataService) {
+    this.cleanSweeps = ds.cleanSweeps;
   }
 
+  delete(key: string) {
+    this.cleanSweeps.remove(key);
+  }
 
   ngOnInit() {
   }

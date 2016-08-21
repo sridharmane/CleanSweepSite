@@ -3,7 +3,8 @@ import * as moment from 'moment';
 
 @Injectable()
 export class DateTimeService {
-  moment: any;
+  // moment: any;
+
   _now: string;
   _selectedDateTime: string;
   constructor() {
@@ -14,6 +15,13 @@ export class DateTimeService {
   public get now(): string {
     return this._now;
   }
+  public get date(): string {
+    return moment().format('DD/MM/YYYY');
+  }
+  public get time(): string {
+    return moment().format('h:mm a');
+  }
+
   public get selectedDateTime(): string {
     if (typeof this._selectedDateTime === 'undefined') {
       this._selectedDateTime = this.now;

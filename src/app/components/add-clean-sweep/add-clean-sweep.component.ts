@@ -1,72 +1,78 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { DateTimeService } from '../../services/date-time.service';
 
+import {CleanSweep}  from '../../types/clean-sweep';
+import {Street}  from '../../types/street';
 
 @Component({
   selector: 'app-add-clean-sweep',
   templateUrl: './add-clean-sweep.component.html',
-  styleUrls: ['add-clean-sweep.component.scss']
+  styleUrls: ['add-clean-sweep.component.scss'],
+  providers: [DateTimeService]
 })
 export class AddCleanSweepComponent implements OnInit {
 
-  cleanSweepNumber: number = 2;
+  @Output() addCleanSweepEvents = new EventEmitter<any>();
+
+  // newCS: CleanSweep = {
+  //   number: null,
+  //   date: null,
+  //   startTime: null,
+  //   endTime: null,
+  //   accessCode: null,
+  //   streets: null,
+  //   streetAddresses: null,
+  //   partners: null
+  // };
 
   cityName: string = 'Buffalo';
   countryCode: string = 'US';
-  streets: any[] = [];
+  streets: Street[] = [{
+      name: null,
+      startHouseNumber: null,
+      endHouseNumber: null
+    }];
 
-  date: Date = new Date();
-  startTime: Date = new Date();
-  endTime: Date = new Date();
+  date: string;
+  startTime: string;
+  endTime: string;
 
-  constructor(@Inject(DataService) ds: DataService) {
-    this.addStreet();
+  constructor(private ds: DataService, private dts: DateTimeService) {
+
+    this.initForm();
   }
-
   ngOnInit() {
   }
+
+  initForm() {
+    this.date = this.dts.date;
+    this.startTime = this.dts.time;
+    this.endTime = this.dts.time;
+    // this.addStreet();
+  }
+
   addStreet() {
     this.streets.push({
-      streetName: '',
-      streetNumbers: []
+      name: null,
+      startHouseNumber: null,
+      endHouseNumber: null
     });
   }
-  // /**
-  //     * Drag Drop Functions
-  //     */
-  // dragOver = false;
-  // onDragEnter($event): void {
-  //   // console.log('Dragged Enter', $event);
-  //   this.dragOver = true;
-  // }
-  // onDragLeave($event): void {
-  //   // console.log('Dragged Leave', $event);
-  //   this.dragOver = false;
-  // }
-  // onDragOver($event): void {
-  //   $event.preventDefault();
-  //   // console.log('Dragged Over', $event);
-  //   this.dragOver = true;
-  // }
-  // onDrop($event): any {
-  //   // console.log('Dropped', $event);
-  //   $event.stopPropagation();
-  //   $event.preventDefault();
-  //   let fileDropped = $event.dataTransfer.files[0];
 
-  //   //TODO Implement correct event management
-  //   this.cdRef.detectChanges();
-  //   this.dragOver = false;
-  //   console.log('Dropped', 'returning false');
-
-  //   return true;
-  // }
-
-  /**
-   * Gets the file type from teh File object
-   */
-  // getFileType(file): string {
-  //   return file.type;
-  // }
+  add() {
+    let cs = new CleanSweep();
+    cs.date = this.date;
+    cs.startTime = this.startTime;
+    cs.endTime = this.startTime;
+    cs.streets = this.streets;
+    this.ds.createCleanSweep(cs);
+    this.addCleanSweepEvents.emit('added');
+  }
+  cancel() {
+    this.streets = [];
+    this.initForm();
+    this.addCleanSweepEvents.emit('cancelled');
+  }
 
 }

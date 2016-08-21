@@ -8,7 +8,7 @@ export class PartnerCategoriesPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     let categories = {};
     console.log('Partners ', value);
-    if (typeof value === 'undefined') {
+    if (typeof value === 'undefined' || value === null) {
       return null;
     }
     value.forEach(function (o) {
