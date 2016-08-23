@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /**
  * angularfire2 
  * */
@@ -49,6 +49,11 @@ import {GeocodingService} from './services/geocoding.service';
 import {DataService} from './services/data.service';
 import {DateTimeService} from './services/date-time.service';
 
+/**
+ * Polymer
+ */
+// import { PolymerElement } from '@vaadin/angular2-polymer';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyBhyEI4oMWsqGK_Jb81q9Sbm7YTZwfnikg',
   authDomain: 'cleansweep-f63d0.firebaseapp.com',
@@ -72,6 +77,7 @@ const firebaseConfig = {
     BrowserModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
 
     MdCoreModule,
     MdButtonModule,
@@ -89,6 +95,8 @@ const firebaseConfig = {
     MdToolbarModule,
     MdTooltipModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    // Polymer elements
+    // PolymerElement('vaadin-date-picker') 
 
   ],
   providers: [

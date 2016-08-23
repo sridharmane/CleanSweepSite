@@ -1,45 +1,43 @@
 <md-card>
   <md-toolbar>
-    <span class="fill-remaining-space">Create Clean Sweep</span>
+    <span class="fill-remaining-space">New Clean Sweep</span>
   </md-toolbar>
+  <div>{{form.value | json }}</div>
   <md-card-content>
-    <form>
+    <form #form="ngForm" [formGroup]="addCleanSweepForm">
+      
       <md-input class="width-100" placeholder="Clean Sweep Number" disabled value="1234">
       </md-input>
-      <table style="width: 100%" cellspacing="0">
+      <table cellspacing="0">
         <tr>
           <td>
-            <md-input type="date" placeholder="Date" style="width: 100%" name="date" [(ngModel)]="date"></md-input>
+            <md-input type="date" placeholder="Date" formControlName="date"></md-input>
           </td>
         </tr>
       </table>
-      <table style="width: 100%" cellspacing="0">
+      <table cellspacing="0">
         <tr>
           <td>
-            <md-input type="time" placeholder="Start Time" style="width: 100%" name="startTime" [(ngModel)]="startTime"></md-input>
+            <md-input type="time" placeholder="Start Time" formControlName="startTime"></md-input>
           </td>
           <td>
-            <md-input type="time" placeholder="End Time" style="width: 100%" name="endTime" [(ngModel)]="endTime"></md-input>
+            <md-input type="time" placeholder="End Time" formControlName="endTime"></md-input>
           </td>
         </tr>
       </table>
-      <table style="width: 100%" cellspacing="0">
-        <tr *ngFor="let street of streets">
+      <table cellspacing="0" formArrayName="streets">
+        <tr *ngFor="let street of streets.controls; let i=index" [formGroupName]="i">
           <td>
-            <md-input class="width-100" placeholder="Street Name" name="streetName" [(ngModel)]="street.name"></md-input>
+            <md-input class="width-100" placeholder="Street Name" formControlName="name"></md-input>
           </td>
           <td>
-            <md-input placeholder="Start House #" type="number" name="streetNumberStart" [(ngModel)]="street.startHouseNumber"></md-input>
+            <md-input placeholder="Start House #" type="number" formControlName="startHouseNumber"></md-input>
           </td>
           <td>
-            <md-input placeholder="End House #" type="number" name="streetNumbersEnd" [(ngModel)]="street.endHouseNumber"></md-input>
+            <md-input placeholder="End House #" type="number" formControlName="endHouseNumber"></md-input>
           </td>
-          <!--<td><md-input #postalCode class="width-100" maxLength="5"
-                      placeholder="Postal Code"
-                      value="94043">
-          <md-hint align="end">{{postalCode.characterCount}} / 5</md-hint>
-        </md-input></td>-->
         </tr>
+    
       </table>
       <button md-button (click)="addStreet()">
           <!--<md-icon class="md-24">add_circle</md-icon>-->
@@ -48,7 +46,7 @@
     </form>
   </md-card-content>
   <md-card-actions>
-    <button md-button color="primary" (click)="add()">ADD</button>
+    <button md-button color="primary" (click)="add()">ADD NEW</button>
     <button md-button color="warn" (click)="cancel()">CANCEL</button>
   </md-card-actions>
 </md-card>

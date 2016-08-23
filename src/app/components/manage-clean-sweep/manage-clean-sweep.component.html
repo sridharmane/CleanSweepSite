@@ -1,6 +1,6 @@
 <md-card >
   <md-toolbar>
-    <span class="fill-remaining-space">Manage Clean Sweep</span>
+    <span class="fill-remaining-space">Clean Sweeps</span>
     <!--<button md-icon-button color="secondary">
         <md-icon class="md-48">add</md-icon>
     </button>-->
@@ -8,14 +8,14 @@
   <md-card-content *ngIf="cleanSweeps">
     <md-list dense>
       <md-list-item *ngFor="let cleanSweep of cleanSweeps | async">
-        <h2 md-line>
+        <h2 md-line class="">
           <span *ngFor="let street of cleanSweep.streets">
             {{street.name}}  
           </span>
         </h2>
-        <p md-line> {{cleanSweep.date}} ({{cleanSweep.startTime}} - {{cleanSweep.endTime}})</p>
+        <p md-line> {{cleanSweep.date | date : 'short'}} ({{cleanSweep.startTime}} - {{cleanSweep.endTime}})</p>
         <!--<p md-line> {{message.message}} </p>-->
-        <button md-icon-button (click)="delete(cleanSweep.$key)">
+        <button md-icon-button (click)="delete(cleanSweep.$key)" color="warn">
           <md-icon>delete</md-icon>
         </button>
       </md-list-item>

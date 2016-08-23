@@ -1,15 +1,18 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, FormControlName, FormArray,Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { DateTimeService } from '../../services/date-time.service';
 
 import {CleanSweep}  from '../../types/clean-sweep';
 import {Street}  from '../../types/street';
 
+
 @Component({
   selector: 'app-add-clean-sweep',
   templateUrl: './add-clean-sweep.component.html',
   styleUrls: ['add-clean-sweep.component.scss'],
-  providers: [DateTimeService]
+  providers: [DateTimeService],
+  // directives: [FormGroup, FormControlName]
 })
 export class AddCleanSweepComponent implements OnInit {
 
@@ -26,53 +29,56 @@ export class AddCleanSweepComponent implements OnInit {
   //   partners: null
   // };
 
-  cityName: string = 'Buffalo';
-  countryCode: string = 'US';
-  streets: Street[] = [{
-      name: null,
-      startHouseNumber: null,
-      endHouseNumber: null
-    }];
-
+  addCleanSweepForm: FormGroup;
   date: string;
   startTime: string;
   endTime: string;
+  streets: FormArray;
 
-  constructor(private ds: DataService, private dts: DateTimeService) {
+  constructor(private ds: DataService, private dts: DateTimeService, private _fb: FormBuilder) {
 
-    this.initForm();
+    this.addCleanSweepForm = this._fb.group({
+      date: this.dts.date,
+      startTime: this.dts.time,
+      endTime: this.dts.time,
+      streets: this.buildStreetsArray()
+    });
   }
   ngOnInit() {
   }
 
-  initForm() {
-    this.date = this.dts.date;
-    this.startTime = this.dts.time;
-    this.endTime = this.dts.time;
-    // this.addStreet();
-  }
-
-  addStreet() {
-    this.streets.push({
-      name: null,
-      startHouseNumber: null,
-      endHouseNumber: null
-    });
-  }
 
   add() {
     let cs = new CleanSweep();
     cs.date = this.date;
     cs.startTime = this.startTime;
     cs.endTime = this.startTime;
-    cs.streets = this.streets;
+    // cs.streets = this.streets;
     this.ds.createCleanSweep(cs);
     this.addCleanSweepEvents.emit('added');
   }
   cancel() {
-    this.streets = [];
-    this.initForm();
     this.addCleanSweepEvents.emit('cancelled');
+  }
+
+  buildStreet() {
+    return this._fb.group({
+      name: '',
+      startHouseNumber: '',
+      endHouseNumber: ''
+    });
+  }
+
+  buildStreetsArray(): FormArray {
+    this.streets = this._fb.array([
+      this.buildStreet()
+    ]);
+    return this.streets;
+  }
+  addStreet(){
+    this.streets.push(
+      this.buildStreet()
+      );
   }
 
 }

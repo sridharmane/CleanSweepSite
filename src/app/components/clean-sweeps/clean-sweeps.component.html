@@ -1,13 +1,11 @@
-<md-toolbar color="primary">
+<!--<md-toolbar color="primary">
   <span class="fill-remaining-space">Clean Sweeps</span>
   <button md-icon-button [md-menu-trigger-for]="menu">
    <md-icon>more_vert</md-icon>
    </button>
-  <button md-icon-button (click)="showAddNew = true">
-   <md-icon>add</md-icon>
-   </button>
-</md-toolbar>
-
+  
+</md-toolbar>-->
+<div class="test">
 <div class="content" >
     <app-add-clean-sweep class="component width-50" *ngIf="showAddNew" (addCleanSweepEvents)="eventsReceived($event)"></app-add-clean-sweep>
     <app-manage-clean-sweep class="component width-50"></app-manage-clean-sweep>
@@ -18,3 +16,7 @@
   <button md-menu-item> Help </button>
   <button md-menu-item disabled> Sign Out </button>
 </md-menu>
+<button md-fab class="fab" (click)="showAddNew = true" color="primary">
+   <md-icon>add</md-icon>
+</button>
+</div>

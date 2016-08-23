@@ -3,6 +3,9 @@
   // Every toolbar row uses a flexbox row layout.
   flex: 1 1 auto;
 }
+.test{
+  height: 100%;
+}
 .width-50{
     width: 50%;
     margin: 0 auto;
@@ -18,4 +21,9 @@
     min-width: 350px;
     margin: 16px auto; 
   }
+}
+.fab{
+  position: fixed;
+  top: 32px;
+  right: 32px;
 }

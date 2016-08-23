@@ -16,7 +16,8 @@ export class DateTimeService {
     return this._now;
   }
   public get date(): string {
-    return moment().format('DD/MM/YYYY');
+    // return moment().format('DD/MM/YYYY');
+    return moment().format();
   }
   public get time(): string {
     return moment().format('h:mm a');
