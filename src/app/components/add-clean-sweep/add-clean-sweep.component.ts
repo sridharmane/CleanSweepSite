@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, FormControlName, FormArray,Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormControlName, FormArray, Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { DateTimeService } from '../../services/date-time.service';
 
@@ -31,18 +31,27 @@ export class AddCleanSweepComponent implements OnInit {
 
   addCleanSweepForm: FormGroup;
   date: string;
-  startTime: string;
-  endTime: string;
+  startTime: string = '09:00 am';
+  endTime: string = '04:00 pm';
   streets: FormArray;
 
   constructor(private ds: DataService, private dts: DateTimeService, private _fb: FormBuilder) {
 
     this.addCleanSweepForm = this._fb.group({
       date: this.dts.date,
-      startTime: this.dts.time,
-      endTime: this.dts.time,
+      startTime: this.startTime,
+      endTime: this.endTime,
       streets: this.buildStreetsArray()
     });
+    this.addCleanSweepForm.valueChanges
+      .map((value) => {
+        // value.firstName = value.firstName.toUpperCase();
+        return value;
+      })
+      .filter((value) => this.addCleanSweepForm.valid)
+      .subscribe(validValue => {
+        console.log(validValue);
+      });
   }
   ngOnInit() {
   }
@@ -52,10 +61,14 @@ export class AddCleanSweepComponent implements OnInit {
     let cs = new CleanSweep();
     cs.date = this.date;
     cs.startTime = this.startTime;
-    cs.endTime = this.startTime;
+    cs.endTime = this.endTime;
     // cs.streets = this.streets;
     this.ds.createCleanSweep(cs);
     this.addCleanSweepEvents.emit('added');
+  }
+  testSubmit(data: any) {
+    console.log(data);
+
   }
   cancel() {
     this.addCleanSweepEvents.emit('cancelled');
@@ -63,9 +76,9 @@ export class AddCleanSweepComponent implements OnInit {
 
   buildStreet() {
     return this._fb.group({
-      name: '',
-      startHouseNumber: '',
-      endHouseNumber: ''
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      startHouseNumber: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]],
+      endHouseNumber: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]]
     });
   }
 
@@ -75,10 +88,17 @@ export class AddCleanSweepComponent implements OnInit {
     ]);
     return this.streets;
   }
-  addStreet(){
+  addStreet() {
     this.streets.push(
       this.buildStreet()
-      );
+    );
+  }
+  removeStreet(index: number) {
+    this.streets.removeAt(index);
+  }
+
+  onSubmit() {
+    // this.form.
   }
 
 }

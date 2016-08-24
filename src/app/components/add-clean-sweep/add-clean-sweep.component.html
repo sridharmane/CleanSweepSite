@@ -1,52 +1,39 @@
-<md-card>
-  <md-toolbar>
-    <span class="fill-remaining-space">New Clean Sweep</span>
-  </md-toolbar>
-  <div>{{form.value | json }}</div>
-  <md-card-content>
-    <form #form="ngForm" [formGroup]="addCleanSweepForm">
-      
-      <md-input class="width-100" placeholder="Clean Sweep Number" disabled value="1234">
-      </md-input>
-      <table cellspacing="0">
-        <tr>
-          <td>
-            <md-input type="date" placeholder="Date" formControlName="date"></md-input>
-          </td>
-        </tr>
-      </table>
-      <table cellspacing="0">
-        <tr>
-          <td>
-            <md-input type="time" placeholder="Start Time" formControlName="startTime"></md-input>
-          </td>
-          <td>
-            <md-input type="time" placeholder="End Time" formControlName="endTime"></md-input>
-          </td>
-        </tr>
-      </table>
-      <table cellspacing="0" formArrayName="streets">
-        <tr *ngFor="let street of streets.controls; let i=index" [formGroupName]="i">
-          <td>
-            <md-input class="width-100" placeholder="Street Name" formControlName="name"></md-input>
-          </td>
-          <td>
-            <md-input placeholder="Start House #" type="number" formControlName="startHouseNumber"></md-input>
-          </td>
-          <td>
-            <md-input placeholder="End House #" type="number" formControlName="endHouseNumber"></md-input>
-          </td>
-        </tr>
-    
-      </table>
+<form #form="ngForm" [formGroup]="addCleanSweepForm" (ngSubmit)="testSubmit(addCleanSweepForm.valid)">
+  <md-card>
+    <md-toolbar>
+      <span class="fill-remaining-space">New Clean Sweep</span>
+    </md-toolbar>
+
+    <md-card-content>
+      <div class="form-row"><md-input placeholder="Clean Sweep Number" disabled value="1234"></md-input></div>
+      <div class="form-row"><md-input type="date" placeholder="Date" formControlName="date"></md-input></div>
+
+      <div class="form-row">
+        <md-input type="time" placeholder="Start Time" formControlName="startTime"></md-input>
+        <md-input type="time" placeholder="End Time" formControlName="endTime"></md-input>
+      </div>
+      <div formArrayName="streets" required>
+        <div *ngFor="let street of streets.controls; let i=index" [formGroupName]="i" class="form-row">
+          <md-input placeholder="Street Name" formControlName="name"></md-input>
+          <md-input placeholder="Start House #" type="number" formControlName="startHouseNumber"></md-input>
+          <md-input placeholder="End House #" type="number" formControlName="endHouseNumber"></md-input>
+          <button md-icon-button [disabled]="i===0" color="warn" (click)="removeStreet(i)">
+              <md-icon>cancel</md-icon>
+            </button>
+        </div>
+      </div>
       <button md-button (click)="addStreet()">
           <!--<md-icon class="md-24">add_circle</md-icon>-->
           <span>Add Street</span>
       </button>
-    </form>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button color="primary" (click)="add()">ADD NEW</button>
-    <button md-button color="warn" (click)="cancel()">CANCEL</button>
-  </md-card-actions>
-</md-card>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button color="primary" type="submit" [disabled]="!form.valid">ADD NEW</button>
+      <button md-button color="warn" type="reset">CANCEL</button>
+    </md-card-actions>
+
+
+
+  </md-card>
+</form>
+<div>{{form.value | json }}</div>

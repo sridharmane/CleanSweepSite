@@ -5,8 +5,10 @@ import * as moment from 'moment';
 export class DateTimeService {
   // moment: any;
 
-  _now: string;
-  _selectedDateTime: string;
+  private _now: string;
+  private _selectedDateTime: string;
+  private _defaultDateFormat = 'DD-MM-YYYY';
+  private _defaultTimeFormat = 'h:mm a';
   constructor() {
     this._now = moment().format();
     console.log(this._now);
@@ -16,8 +18,8 @@ export class DateTimeService {
     return this._now;
   }
   public get date(): string {
-    // return moment().format('DD/MM/YYYY');
-    return moment().format();
+    // return moment().format('DD-MM-YYYY');
+    return moment().format(this._defaultDateFormat);
   }
   public get time(): string {
     return moment().format('h:mm a');
@@ -62,5 +64,11 @@ export class DateTimeService {
   }
 
 
+  formatTimeForDisplay(time: string) {
+    return moment(time).format(this._defaultTimeFormat);
+  }
+  formatDateForDisplay(date: string) {
+    return moment(date).format(this._defaultDateFormat);
+  }
 
 }

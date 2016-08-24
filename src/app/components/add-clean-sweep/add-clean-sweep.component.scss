@@ -6,6 +6,12 @@
 .width-100{
   width: 100%;
 }
+.width-50{
+  width: 50%;
+}
+.width-75{
+  width: 75%;
+}
 md-card{
   padding: 0;
   margin: 16px
@@ -22,4 +28,14 @@ md-card{
     margin: 0 16px 16px 16px ;
   }
 
+}
+.form-row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  md-input{
+    margin: 1px;
+    // width: 100%;
+  }
+  
 }
