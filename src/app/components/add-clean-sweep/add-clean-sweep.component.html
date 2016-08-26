@@ -28,7 +28,7 @@
     </md-card-content>
     <md-card-actions>
       <button md-button color="primary" type="submit" [disabled]="!form.valid">ADD NEW</button>
-      <button md-button color="warn" type="reset">CANCEL</button>
+      <button md-button color="warn" type="reset" (click)="cancel()">CANCEL</button>
     </md-card-actions>
   </md-card>
 </form>

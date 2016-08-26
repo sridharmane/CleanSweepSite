@@ -56,7 +56,7 @@ export class AddCleanSweepComponent implements OnInit {
     this.ds.createCleanSweep(cs);
     this.addCleanSweepEvents.emit('added');
   }
-
+  
   cancel() {
     this.addCleanSweepEvents.emit('cancelled');
   }
