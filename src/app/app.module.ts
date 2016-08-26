@@ -48,6 +48,9 @@ import { CleanSweepsComponent } from './components/clean-sweeps/clean-sweeps.com
 import {GeocodingService} from './services/geocoding.service';
 import {DataService} from './services/data.service';
 import {DateTimeService} from './services/date-time.service';
+import { StreetNamesPipe } from './pipes/street-names.pipe';
+import { CategorizeByDatePipe } from './pipes/categorize-by-date.pipe';
+import { MonthNamesPipe } from './pipes/month-names.pipe';
 
 /**
  * Polymer
@@ -71,6 +74,9 @@ const firebaseConfig = {
     HomeComponent,
     PageNotFoundComponent,
     CleanSweepsComponent,
+    StreetNamesPipe,
+    CategorizeByDatePipe,
+    MonthNamesPipe,
   ],
   imports: [
     routing,

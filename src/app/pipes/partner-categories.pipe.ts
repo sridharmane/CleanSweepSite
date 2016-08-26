@@ -17,7 +17,7 @@ export class PartnerCategoriesPipe implements PipeTransform {
       categories[category].partners.push(o);
     });
 
-    return Object.keys(categories).map(function (key) { return categories[key] });
+    return Object.keys(categories).map(function (key) { return categories[key]; });
     // return null;
   }
 

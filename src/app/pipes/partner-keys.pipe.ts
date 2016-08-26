@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PartnerKeysPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    let tagName = args;
+    // let tagName = args;
     let keys: any[] = value;
     console.log(keys);
 

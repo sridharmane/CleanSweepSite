@@ -9,10 +9,10 @@ export interface CleanSweepData {
     date: string;
     startTime: string;
     endTime: string;
-    accessCode: string;
+    accessCode?: string;
     streets: Street[];
     streetAddresses?: StreetAddress[];
-    partners: Partner[];
+    partners?: Partner[];
 }
 export class CleanSweep {
     number: string;
@@ -25,14 +25,23 @@ export class CleanSweep {
     partners: Partner[];
 
     constructor(csd?: CleanSweepData) {
-
+        this.date = csd.date;
+        this.startTime = csd.startTime;
+        this.endTime = csd.endTime;
+        this.streets = csd.streets;
+        this.accessCode = this.generateAccessCode();
     }
-    addStreet(street: Street) {
-        this.streets.push(street);
+    generateAccessCode() {
+        let part1 = Math.floor(Math.random() * 900) + 100;
+        let part2 = Math.floor(Math.random() * 900) + 100;
+        return part1 + '-' + part2;
     }
-    addStreetAddress(streetAddress: StreetAddress) {
-        this.streetAddresses.push(streetAddress);
-    }
+    // addStreet(street: Street) {
+    //     this.streets.push(street);
+    // }
+    // addStreetAddress(streetAddress: StreetAddress) {
+    //     this.streetAddresses.push(streetAddress);
+    // }
 
     // public set date(v: string) {
     //     this._date = v;

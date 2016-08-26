@@ -1,4 +1,4 @@
-<md-card >
+<md-card>
   <md-toolbar>
     <span class="fill-remaining-space">Clean Sweeps</span>
     <!--<button md-icon-button color="secondary">
@@ -6,19 +6,23 @@
     </button>-->
   </md-toolbar>
   <md-card-content *ngIf="cleanSweeps">
-    <md-list dense>
-      <md-list-item *ngFor="let cleanSweep of cleanSweeps | async">
+    <div *ngFor="let category of cleanSweeps | async | categorizeByDate : 'month'; let i = index;">
+      <md-list *ngIf="category">
+      <h3 md-subheader *ngIf="category">{{i | monthNames}}</h3>
+      <md-list-item *ngFor="let cleanSweep of category">
         <h2 md-line class="">
-          <span *ngFor="let street of cleanSweep.streets">
-            {{street.name}}  
+          <span>
+            {{cleanSweep.streets | streetNames}}
           </span>
         </h2>
-        <p md-line> {{cleanSweep.date | date : 'short'}} ({{cleanSweep.startTime}} - {{cleanSweep.endTime}})</p>
-        <!--<p md-line> {{message.message}} </p>-->
+        <p md-line> {{cleanSweep.date}} ({{cleanSweep.startTime}} - {{cleanSweep.endTime}})</p>
         <button md-icon-button (click)="delete(cleanSweep.$key)" color="warn">
           <md-icon>delete</md-icon>
         </button>
       </md-list-item>
+      <md-divider *ngIf="category"></md-divider>
     </md-list>
+    </div>
+    
   </md-card-content>
 </md-card>

@@ -1,11 +1,11 @@
-<form #form="ngForm" [formGroup]="addCleanSweepForm" (ngSubmit)="testSubmit(addCleanSweepForm.valid)">
+<form #form="ngForm" [formGroup]="addCleanSweepForm" (ngSubmit)="submit(addCleanSweepForm.value)">
   <md-card>
     <md-toolbar>
       <span class="fill-remaining-space">New Clean Sweep</span>
     </md-toolbar>
 
     <md-card-content>
-      <div class="form-row"><md-input placeholder="Clean Sweep Number" disabled value="1234"></md-input></div>
+      <!--<div class="form-row"><md-input placeholder="Clean Sweep Number" disabled value="1234"></md-input></div>-->
       <div class="form-row"><md-input type="date" placeholder="Date" formControlName="date"></md-input></div>
 
       <div class="form-row">
@@ -22,8 +22,7 @@
             </button>
         </div>
       </div>
-      <button md-button (click)="addStreet()">
-          <!--<md-icon class="md-24">add_circle</md-icon>-->
+      <button md-button type="button" (click)="addStreet()">
           <span>Add Street</span>
       </button>
     </md-card-content>
@@ -31,9 +30,6 @@
       <button md-button color="primary" type="submit" [disabled]="!form.valid">ADD NEW</button>
       <button md-button color="warn" type="reset">CANCEL</button>
     </md-card-actions>
-
-
-
   </md-card>
 </form>
-<div>{{form.value | json }}</div>
+<!--<div>{{form.value | json }}</div>-->

@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, FormControlName, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { DateTimeService } from '../../services/date-time.service';
 
 import {CleanSweep}  from '../../types/clean-sweep';
-import {Street}  from '../../types/street';
+// import {Street}  from '../../types/street';
 
 
 @Component({
@@ -17,17 +17,6 @@ import {Street}  from '../../types/street';
 export class AddCleanSweepComponent implements OnInit {
 
   @Output() addCleanSweepEvents = new EventEmitter<any>();
-
-  // newCS: CleanSweep = {
-  //   number: null,
-  //   date: null,
-  //   startTime: null,
-  //   endTime: null,
-  //   accessCode: null,
-  //   streets: null,
-  //   streetAddresses: null,
-  //   partners: null
-  // };
 
   addCleanSweepForm: FormGroup;
   date: string;
@@ -45,40 +34,38 @@ export class AddCleanSweepComponent implements OnInit {
     });
     this.addCleanSweepForm.valueChanges
       .map((value) => {
-        // value.firstName = value.firstName.toUpperCase();
+        // value.streets = value.firstName.toUpperCase();
         return value;
       })
-      .filter((value) => this.addCleanSweepForm.valid)
+      // .filter((value) => this.addCleanSweepForm.valid)
       .subscribe(validValue => {
         console.log(validValue);
       });
+      this.getCleanSweep();
   }
   ngOnInit() {
   }
+  getLastCleanSweepNumber(){
+    // this.ds.getCleanSweep({});
+  }
 
-
-  add() {
-    let cs = new CleanSweep();
-    cs.date = this.date;
-    cs.startTime = this.startTime;
-    cs.endTime = this.endTime;
-    // cs.streets = this.streets;
+  submit(formData) {
+    console.log('Submiting Form with data:', formData);
+    let cs = new CleanSweep(formData);
+    console.log(cs);
     this.ds.createCleanSweep(cs);
     this.addCleanSweepEvents.emit('added');
   }
-  testSubmit(data: any) {
-    console.log(data);
 
-  }
   cancel() {
     this.addCleanSweepEvents.emit('cancelled');
   }
 
   buildStreet() {
     return this._fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      startHouseNumber: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]],
-      endHouseNumber: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]]
+      name: ['Elm', [Validators.required, Validators.minLength(3)]],
+      startHouseNumber: ['1', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]],
+      endHouseNumber: ['100', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]]
     });
   }
 
@@ -99,6 +86,9 @@ export class AddCleanSweepComponent implements OnInit {
 
   onSubmit() {
     // this.form.
+  }
+  getCleanSweep(){
+    this.ds.getCleanSweep();
   }
 
 }

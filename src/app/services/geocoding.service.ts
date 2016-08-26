@@ -1,6 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import * as firebase from 'firebase';
+import { Injectable } from '@angular/core';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+// import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+// import * as firebase from 'firebase';
 
 @Injectable()
 export class GeocodingService {
@@ -105,7 +106,7 @@ export class GeocodingService {
 
 
 
-  constructor(@Inject(AngularFire) af: AngularFire) {
+  constructor(af: AngularFire) {
     this.streetAddresses = af.database.list('streetAddresses');
   }
 
@@ -126,13 +127,13 @@ export class GeocodingService {
         if (ac.types.indexOf(cName) === 0) {
           extractedData[cName] = ac.short_name;
         }
-      })
+      });
     });
     // console.log(extractedData);
     return extractedData;
   }
   extractLocation(geometry: any): any {
-    return geometry.location
+    return geometry.location;
   }
   getMapData(mapResult): any {
     let mapData = {};

@@ -7,8 +7,11 @@ export class DateTimeService {
 
   private _now: string;
   private _selectedDateTime: string;
-  private _defaultDateFormat = 'DD-MM-YYYY';
+  private _defaultDateFormat = 'MM-DD-YYYY';
   private _defaultTimeFormat = 'h:mm a';
+
+  monthNames: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
   constructor() {
     this._now = moment().format();
     console.log(this._now);
