@@ -1,3 +1,4 @@
+/// <reference path="../../typings/index.d.ts" />
 /* tslint:disable:no-unused-variable */
 
 import { addProviders, async, inject } from '@angular/core/testing';
@@ -16,8 +17,8 @@ describe('App: CleanSweepSite', () => {
       expect(app).toBeTruthy();
     }));
 
-  it('should have as title \'app works!\'',
+  it('should have as title \'Home\'',
     inject([AppComponent], (app: AppComponent) => {
-      expect(app.title).toEqual('app works!');
+      expect(app.title).toEqual('Home');
     }));
 });
