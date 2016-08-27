@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Condensed Regular'), local('RobotoCondensed-Regular'), url("RobotoCondensed-Regular.ttf") format('truetype');
+}
 .fill-remaining-space {
   // This fills the remaining space, by using flexbox. 
   // Every toolbar row uses a flexbox row layout.
@@ -19,4 +25,21 @@ md-card{
     margin: 0 16px 16px 16px ;
   }
 
+}
+.item-clean-sweep{
+  font-family: "Roboto Condensed";
+  h2{
+    opacity: 0.5;
+  }
+  button{
+     opacity: 0;
+   }
+  &:hover{
+   h2{
+     opacity: 1;
+   } 
+   button{
+     opacity: 1;
+   }
+  }
 }
