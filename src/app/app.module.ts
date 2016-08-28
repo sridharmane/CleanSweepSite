@@ -35,13 +35,12 @@ import {routing, appRoutingProviders} from './app.routes';
  * Components 
  * */
 import { AppComponent } from './app.component';
-import { AddCleanSweepComponent } from './components/add-clean-sweep';
-import { ManageCleanSweepComponent } from './components/manage-clean-sweep';
+import { CleanSweepsComponent, AddCleanSweepComponent,
+  EditCleanSweepComponent, ListCleanSweepsComponent } from './components/clean-sweeps/';
 import { PartnersComponent } from './components/partners';
 import { PartnerCategoriesComponent } from './components/partner-categories';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { CleanSweepsComponent } from './components/clean-sweeps/clean-sweeps.component';
 /**
  * Services 
  * */
@@ -51,11 +50,6 @@ import {DateTimeService} from './services/date-time.service';
 import { StreetNamesPipe } from './pipes/street-names.pipe';
 import { CategorizeByDatePipe } from './pipes/categorize-by-date.pipe';
 import { MonthNamesPipe } from './pipes/month-names.pipe';
-
-/**
- * Polymer
- */
-// import { PolymerElement } from '@vaadin/angular2-polymer';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBhyEI4oMWsqGK_Jb81q9Sbm7YTZwfnikg',
@@ -67,8 +61,10 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
+    CleanSweepsComponent,
     AddCleanSweepComponent,
-    ManageCleanSweepComponent,
+    EditCleanSweepComponent,
+    ListCleanSweepsComponent,
     PartnersComponent,
     PartnerCategoriesComponent,
     HomeComponent,
@@ -101,8 +97,6 @@ const firebaseConfig = {
     MdToolbarModule,
     MdTooltipModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    // Polymer elements
-    // PolymerElement('vaadin-date-picker') 
 
   ],
   providers: [

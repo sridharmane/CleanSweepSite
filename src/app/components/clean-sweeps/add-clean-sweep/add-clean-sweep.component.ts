@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { DataService } from '../../services/data.service';
-import { DateTimeService } from '../../services/date-time.service';
+import { DataService } from '../../../services/data.service';
+import { DateTimeService } from '../../../services/date-time.service';
 
-import {CleanSweep}  from '../../types/clean-sweep';
+import {CleanSweep}  from '../../../types/clean-sweep';
+import { CleanSweepEventData } from '../../../types/clean-sweep-event-data';
 // import {Street}  from '../../types/street';
 
 
@@ -16,7 +17,7 @@ import {CleanSweep}  from '../../types/clean-sweep';
 })
 export class AddCleanSweepComponent implements OnInit {
 
-  @Output() addCleanSweepEvents = new EventEmitter<any>();
+  @Output() cleanSweepEvents = new EventEmitter<CleanSweepEventData>();
 
   addCleanSweepForm: FormGroup;
   date: string;
@@ -41,11 +42,11 @@ export class AddCleanSweepComponent implements OnInit {
       .subscribe(validValue => {
         console.log(validValue);
       });
-      this.getCleanSweep();
+    this.getCleanSweep();
   }
   ngOnInit() {
   }
-  getLastCleanSweepNumber(){
+  getLastCleanSweepNumber() {
     // this.ds.getCleanSweep({});
   }
 
@@ -54,11 +55,11 @@ export class AddCleanSweepComponent implements OnInit {
     let cs = new CleanSweep(formData);
     console.log(cs);
     this.ds.createCleanSweep(cs);
-    this.addCleanSweepEvents.emit('added');
+    this.cleanSweepEvents.emit({ component: 'addCleanSweepComponent', visible: false });
   }
-  
+
   cancel() {
-    this.addCleanSweepEvents.emit('cancelled');
+    this.cleanSweepEvents.emit({ component: 'addCleanSweepComponent', visible: false });
   }
 
   buildStreet() {
@@ -87,7 +88,7 @@ export class AddCleanSweepComponent implements OnInit {
   onSubmit() {
     // this.form.
   }
-  getCleanSweep(){
+  getCleanSweep() {
     this.ds.getCleanSweep();
   }
 

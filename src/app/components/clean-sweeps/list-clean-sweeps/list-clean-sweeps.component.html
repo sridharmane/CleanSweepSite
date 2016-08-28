@@ -22,7 +22,7 @@
           <md-icon>more_vert</md-icon>
         </button>
         </md-list-item>
-        <md-divider *ngIf="category"></md-divider>
+        <md-divider *ngIf="category && i < cleanSweeps.length-1"></md-divider>
       </md-list>
     </div>
 
@@ -30,5 +30,5 @@
 </md-card>
 <md-menu #menu="mdMenu">
     <button md-menu-item (click)="edit()"><md-icon>edit</md-icon> Edit </button>
-    <button md-menu-item (click)="delete()"><md-icon>delete</md-icon> Delete </button>
+    <button md-menu-item (click)="delete()"><md-icon class="icon-danger">delete</md-icon> Delete </button>
 </md-menu>

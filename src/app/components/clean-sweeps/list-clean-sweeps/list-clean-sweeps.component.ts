@@ -1,24 +1,24 @@
-import { Component, OnInit, NgZone, ViewChildren, QueryList} from '@angular/core';
-import { DataService } from '../../services/data.service';
+import { Component, OnInit, NgZone, Output, EventEmitter} from '@angular/core';
+import { DataService } from '../../../services/data.service';
 import { FirebaseListObservable } from 'angularfire2';
-import { StreetNamesPipe } from '../../pipes/street-names.pipe';
-import { CategorizeByDatePipe } from '../../pipes/categorize-by-date.pipe';
-import { MonthNamesPipe } from '../../pipes/month-names.pipe';
-import { MdMenuTrigger } from '@angular2-material/menu';
+import { StreetNamesPipe } from '../../../pipes/street-names.pipe';
+import { CategorizeByDatePipe } from '../../../pipes/categorize-by-date.pipe';
+import { MonthNamesPipe } from '../../../pipes/month-names.pipe';
+import { CleanSweepEventData } from '../../../types/clean-sweep-event-data';
 
 
 @Component({
-  selector: 'app-manage-clean-sweep',
-  templateUrl: 'manage-clean-sweep.component.html',
-  styleUrls: ['manage-clean-sweep.component.scss'],
+  selector: 'app-list-clean-sweeps',
+  templateUrl: 'list-clean-sweeps.component.html',
+  styleUrls: ['list-clean-sweeps.component.scss'],
   pipes: [StreetNamesPipe, CategorizeByDatePipe, MonthNamesPipe]
 })
-export class ManageCleanSweepComponent implements OnInit {
+export class ListCleanSweepsComponent implements OnInit {
   // @ViewChildren(MdMenuTrigger) triggers: QueryList<MdMenuTrigger>;
 
   cleanSweeps: FirebaseListObservable<any[]>;
   currentKey: string = '';
-
+  @Output() cleanSweepEvents = new EventEmitter<CleanSweepEventData>();
 
   constructor(ds: DataService, private nz: NgZone) {
     this.cleanSweeps = ds.cleanSweeps;
@@ -48,7 +48,8 @@ export class ManageCleanSweepComponent implements OnInit {
   }
   edit() {
     console.log('edit: ', this.currentKey);
-    
+    this.cleanSweepEvents.emit({ component: 'editCleanSweepComponent', visible: true });
+
   }
   delete() {
     console.log('delete: ', this.currentKey);

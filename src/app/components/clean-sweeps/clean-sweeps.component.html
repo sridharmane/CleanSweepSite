@@ -6,17 +6,18 @@
   
 </md-toolbar>-->
 <div class="test">
-<div class="content" >
-    <app-add-clean-sweep class="component width-50" *ngIf="showAddNew" (addCleanSweepEvents)="eventsReceived($event)"></app-add-clean-sweep>
-    <app-manage-clean-sweep class="component width-50"></app-manage-clean-sweep>
-</div>
-<md-menu #menu="mdMenu" x-position="before">
-  <button md-menu-item> Refresh </button>
-  <button md-menu-item> Settings </button>
-  <button md-menu-item> Help </button>
-  <button md-menu-item disabled> Sign Out </button>
-</md-menu>
-<button md-fab class="fab" (click)="showAddNew = true" color="primary">
+  <div class="content">
+    <app-add-clean-sweep class="component width-50" *ngIf="showAddNew" (cleanSweepEvents)="eventsReceived($event)" [@showHideTrigger]="showAddNew"></app-add-clean-sweep>
+    <app-edit-clean-sweep class="component width-50" *ngIf="showEdit" (cleanSweepEvents)="eventsReceived($event)" [@showHideTrigger]="showEdit"></app-edit-clean-sweep>
+    <app-list-clean-sweeps class="component width-50" (cleanSweepEvents)="eventsReceived($event)"></app-list-clean-sweeps>
+  </div>
+  <md-menu #menu="mdMenu" x-position="before">
+    <button md-menu-item> Refresh </button>
+    <button md-menu-item> Settings </button>
+    <button md-menu-item> Help </button>
+    <button md-menu-item disabled> Sign Out </button>
+  </md-menu>
+  <button md-fab class="fab" (click)="showAddNew = true" color="primary">
    <md-icon>add</md-icon>
 </button>
 </div>

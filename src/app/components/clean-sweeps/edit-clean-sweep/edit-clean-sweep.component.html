@@ -1,0 +1,35 @@
+<form #form="ngForm" [formGroup]="editCleanSweepForm" (ngSubmit)="submit(addCleanSweepForm.value)">
+  <md-card>
+    <md-toolbar>
+      <span class="fill-remaining-space">Edit Clean Sweep</span>
+    </md-toolbar>
+
+    <md-card-content>
+      <!--<div class="form-row"><md-input placeholder="Clean Sweep Number" disabled value="1234"></md-input></div>-->
+      <div class="form-row"><md-input type="date" placeholder="Date" formControlName="date"></md-input></div>
+
+      <div class="form-row">
+        <md-input type="time" placeholder="Start Time" formControlName="startTime"></md-input>
+        <md-input type="time" placeholder="End Time" formControlName="endTime"></md-input>
+      </div>
+      <div formArrayName="streets" required>
+        <div *ngFor="let street of streets.controls; let i=index" [formGroupName]="i" class="form-row">
+          <md-input placeholder="Street Name" formControlName="name"></md-input>
+          <md-input placeholder="Start House #" type="number" formControlName="startHouseNumber"></md-input>
+          <md-input placeholder="End House #" type="number" formControlName="endHouseNumber"></md-input>
+          <button md-icon-button [disabled]="i===0" color="warn" (click)="removeStreet(i)">
+              <md-icon>cancel</md-icon>
+            </button>
+        </div>
+      </div>
+      <button md-button type="button" (click)="addStreet()">
+          <span>Add Street</span>
+      </button>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button color="primary" type="submit" [disabled]="!form.valid">SAVE CHANGES</button>
+      <button md-button color="warn" type="reset" (click)="cancel()">CANCEL</button>
+    </md-card-actions>
+  </md-card>
+</form>
+<!--<div>{{form.value | json }}</div>-->

@@ -1,15 +1,10 @@
-@font-face {
-  font-family: "Roboto Condensed";
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto Condensed Regular'), local('RobotoCondensed-Regular'), url("RobotoCondensed-Regular.ttf") format('truetype');
-}
 .fill-remaining-space {
   // This fills the remaining space, by using flexbox. 
   // Every toolbar row uses a flexbox row layout.
   flex: 1 1 auto;
 }
 md-card{
+  font-family: 'Roboto Condensed', sans-serif;
   padding: 0;
   margin: 16px
   md-toolbar{
@@ -27,8 +22,9 @@ md-card{
 
 }
 .item-clean-sweep{
-  font-family: "Roboto Condensed";
+  cursor: default;
   h2{
+    font-family: 'Roboto Condensed', sans-serif;
     opacity: 0.5;
   }
   button{
@@ -42,4 +38,12 @@ md-card{
      opacity: 1;
    }
   }
+}
+
+.icon-danger{
+  color: red;
+}
+
+.md-list-item{
+  font-family: 'Roboto Condensed', sans-serif;
 }

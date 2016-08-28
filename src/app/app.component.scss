@@ -1,5 +1,5 @@
 body {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
 
   // Helps fonts on OSX looks more consistent with other systems
   // Isn't currently in button styles due to performance concerns
@@ -14,6 +14,7 @@ body {
     padding: 32px;
   }
 md-card{
+  font-family: 'Roboto Condensed', sans-serif;
   padding: 0;
   background-color: green;
   md-toolbar{
@@ -28,6 +29,7 @@ md-card{
 }
 
   md-toolbar {
+    font-family: 'Roboto Condensed', sans-serif;
     md-icon {
       cursor: pointer;
     }
