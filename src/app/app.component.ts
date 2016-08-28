@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 
 import 'hammerjs';
+import * as firbase from 'firebase'; 
 
 @Component({
   selector: 'app-root',

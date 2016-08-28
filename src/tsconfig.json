@@ -15,6 +15,7 @@
     ],
     "types": [
       "jasmine"
-    ]
+    ],
+    "files": [ "typings/index.d.ts" ]
   }
 }
