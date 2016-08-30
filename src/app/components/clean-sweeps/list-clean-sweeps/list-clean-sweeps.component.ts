@@ -1,5 +1,6 @@
 import { Component, OnInit, NgZone, Output, EventEmitter} from '@angular/core';
 import { DataService } from '../../../services/data.service';
+import { DateTimeService } from '../../../services/date-time.service';
 import { FirebaseListObservable } from 'angularfire2';
 import { StreetNamesPipe } from '../../../pipes/street-names.pipe';
 import { CategorizeByDatePipe } from '../../../pipes/categorize-by-date.pipe';
@@ -20,7 +21,7 @@ export class ListCleanSweepsComponent implements OnInit {
   currentKey: string = '';
   @Output() cleanSweepEvents = new EventEmitter<CleanSweepEventData>();
 
-  constructor(ds: DataService, private nz: NgZone) {
+  constructor(ds: DataService, private nz: NgZone, private dt: DateTimeService) {
     this.cleanSweeps = ds.cleanSweeps;
 
     // this.cleanSweeps.subscribe(() => {
@@ -66,5 +67,10 @@ export class ListCleanSweepsComponent implements OnInit {
     //   });
     // }
   }
-
+  getOrdinalFromDate(date: string): string {
+    return this.dt.getDayWithOrdinal(date).slice(-2);
+  }
+  getDayFromDate(date: string): string {
+    return this.dt.getDayWithOrdinal(date).slice(0, -2);
+  }
 }

@@ -8,19 +8,18 @@
   <md-card-content *ngIf="cleanSweeps">
     <div *ngFor="let category of cleanSweeps | async | categorizeByDate : 'month'; let i = index;">
       <md-list *ngIf="category">
-        <h3 md-subheader *ngIf="category">{{i | monthNames}}</h3>
+        <h3 class="subheader" md-subheader *ngIf="category">{{i | monthNames}}</h3>
         <md-list-item *ngFor="let cleanSweep of category" class="item-clean-sweep">
-          <!--<md-icon md-list-avatar>folder</md-icon>-->
-          <h2 md-list-icon>{{cleanSweep.date.split('-')[1]}}</h2>
+
+          <h2 md-list-icon class="list-icon">{{getDayFromDate(cleanSweep.date)}}<sup>{{getOrdinalFromDate(cleanSweep.date)}}</sup></h2>
           <h4 md-line>{{cleanSweep.streets | streetNames}}</h4>
-          <!--<p md-line>{{cleanSweep.date}} ({{cleanSweep.startTime}} - {{cleanSweep.endTime}})</p>-->
-        
-        <button md-icon-button  md-tooltip="Show Stats" tooltip-position="below">
-          <md-icon>show_chart</md-icon>
-        </button>
-        <button md-icon-button  md-tooltip="More Options" tooltip-position="below" [md-menu-trigger-for]="menu" (click)="selectedMenu(cleanSweep.$key)">
-          <md-icon>more_vert</md-icon>
-        </button>
+          <p md-line>{{cleanSweep.accessCode}}</p>
+          <button md-icon-button md-tooltip="Show Stats" tooltip-position="below">
+              <md-icon>insert_chart</md-icon>
+            </button>
+          <button md-icon-button md-tooltip="More Options" tooltip-position="below" [md-menu-trigger-for]="menu" (click)="selectedMenu(cleanSweep.$key)">
+              <md-icon>more_vert</md-icon>
+            </button>
         </md-list-item>
         <md-divider *ngIf="category && i < cleanSweeps.length-1"></md-divider>
       </md-list>
@@ -29,6 +28,6 @@
   </md-card-content>
 </md-card>
 <md-menu #menu="mdMenu">
-    <button md-menu-item (click)="edit()"><md-icon>edit</md-icon> Edit </button>
-    <button md-menu-item (click)="delete()"><md-icon class="icon-danger">delete</md-icon> Delete </button>
+  <button md-menu-item (click)="edit()"><md-icon>edit</md-icon> Edit </button>
+  <button md-menu-item (click)="delete()"><md-icon class="icon-danger">delete</md-icon> Delete </button>
 </md-menu>

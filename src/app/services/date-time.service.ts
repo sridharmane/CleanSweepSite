@@ -73,5 +73,7 @@ export class DateTimeService {
   formatDateForDisplay(date: string) {
     return moment(date).format(this._defaultDateFormat);
   }
-
+  getDayWithOrdinal(date: string): string {
+    return moment(date).format('Do');
+  }
 }

@@ -3,13 +3,6 @@
   // Every toolbar row uses a flexbox row layout.
   flex: 1 1 auto;
 }
-.test{
-  height: 100%;
-}
-.width-50{
-    width: 50%;
-    margin: 0 auto;
-}
 .content{
   display: flex;
   flex-direction: column;
@@ -17,7 +10,7 @@
   flex-basis: 50%;
   
   .component{
-    width:50%;
+    width:75%;
     min-width: 350px;
     margin: 16px auto; 
   }

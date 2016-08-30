@@ -7,6 +7,7 @@ md-card{
   font-family: 'Roboto Condensed', sans-serif;
   padding: 0;
   margin: 16px
+  
   md-toolbar{
     width: 100%;
     padding: 0 16px;
@@ -21,16 +22,28 @@ md-card{
   }
 
 }
+
 .item-clean-sweep{
   cursor: default;
+  box-shadow: 0;
+
   h2{
     font-family: 'Roboto Condensed', sans-serif;
     opacity: 0.5;
+    width: 32px;
+    
+    sup{
+      font-size: 12px;
+      padding: 2px;
+    }
+  }
+  h4{
+    display: flex;
   }
   button{
      opacity: 0;
    }
-  &:hover{
+   &:hover{
    h2{
      opacity: 1;
    } 
@@ -38,6 +51,10 @@ md-card{
      opacity: 1;
    }
   }
+}
+.item-clean-sweep:hover{
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.1), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    color: red;
 }
 
 .icon-danger{
