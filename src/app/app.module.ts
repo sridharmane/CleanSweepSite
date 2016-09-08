@@ -9,12 +9,12 @@ import { AngularFireModule } from 'angularfire2';
 /**
  * angular2-material 
  * */
-import {MdCoreModule} from '@angular2-material/core';
+import {MdCoreModule, OVERLAY_PROVIDERS} from '@angular2-material/core';
 import {MdButtonModule} from '@angular2-material/button';
 import {MdCardModule} from '@angular2-material/card';
 import {MdCheckboxModule} from '@angular2-material/checkbox';
 import {MdGridListModule} from '@angular2-material/grid-list';
-import {MdIconModule} from '@angular2-material/icon';
+import {MdIconModule, MdIconRegistry} from '@angular2-material/icon';
 import {MdInputModule} from '@angular2-material/input';
 import {MdListModule} from '@angular2-material/list';
 import {MdMenuModule} from '@angular2-material/menu';
@@ -31,25 +31,38 @@ import {MdTooltipModule} from '@angular2-material/tooltip';
  * Routes 
  * */
 import {routing, appRoutingProviders} from './app.routes';
+
 /**
  * Components 
  * */
 import { AppComponent } from './app.component';
-import { CleanSweepsComponent, AddCleanSweepComponent,
-  EditCleanSweepComponent, ListCleanSweepsComponent } from './components/clean-sweeps/';
+import {
+  CleanSweepsComponent,
+  AddCleanSweepComponent,
+  EditCleanSweepComponent,
+  ListCleanSweepsComponent,
+  DetailCleanSweepComponent
+} from './components/clean-sweeps/';
 import { PartnersComponent } from './components/partners';
 import { PartnerCategoriesComponent } from './components/partner-categories';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+
 /**
  * Services 
  * */
 import {GeocodingService} from './services/geocoding.service';
 import {DataService} from './services/data.service';
 import {DateTimeService} from './services/date-time.service';
+
+/**
+ * Pipes 
+ * */
 import { StreetNamesPipe } from './pipes/street-names.pipe';
 import { CategorizeByDatePipe } from './pipes/categorize-by-date.pipe';
 import { MonthNamesPipe } from './pipes/month-names.pipe';
+import { PartnerKeysPipe } from './pipes/partner-keys.pipe';
+import { PartnerCategoriesPipe } from './pipes/partner-categories.pipe';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBhyEI4oMWsqGK_Jb81q9Sbm7YTZwfnikg',
@@ -65,6 +78,7 @@ const firebaseConfig = {
     AddCleanSweepComponent,
     EditCleanSweepComponent,
     ListCleanSweepsComponent,
+    DetailCleanSweepComponent,
     PartnersComponent,
     PartnerCategoriesComponent,
     HomeComponent,
@@ -73,6 +87,8 @@ const firebaseConfig = {
     StreetNamesPipe,
     CategorizeByDatePipe,
     MonthNamesPipe,
+    PartnerKeysPipe,
+    PartnerCategoriesPipe
   ],
   imports: [
     routing,
@@ -104,6 +120,8 @@ const firebaseConfig = {
     GeocodingService,
     DataService,
     DateTimeService,
+    MdIconRegistry,
+    OVERLAY_PROVIDERS
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]

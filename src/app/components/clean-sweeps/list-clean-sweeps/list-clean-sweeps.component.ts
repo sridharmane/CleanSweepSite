@@ -2,9 +2,6 @@ import { Component, OnInit, NgZone, Output, EventEmitter} from '@angular/core';
 import { DataService } from '../../../services/data.service';
 import { DateTimeService } from '../../../services/date-time.service';
 import { FirebaseListObservable } from 'angularfire2';
-import { StreetNamesPipe } from '../../../pipes/street-names.pipe';
-import { CategorizeByDatePipe } from '../../../pipes/categorize-by-date.pipe';
-import { MonthNamesPipe } from '../../../pipes/month-names.pipe';
 import { CleanSweepEventData } from '../../../types/clean-sweep-event-data';
 
 
@@ -12,7 +9,6 @@ import { CleanSweepEventData } from '../../../types/clean-sweep-event-data';
   selector: 'app-list-clean-sweeps',
   templateUrl: 'list-clean-sweeps.component.html',
   styleUrls: ['list-clean-sweeps.component.scss'],
-  pipes: [StreetNamesPipe, CategorizeByDatePipe, MonthNamesPipe]
 })
 export class ListCleanSweepsComponent implements OnInit {
   // @ViewChildren(MdMenuTrigger) triggers: QueryList<MdMenuTrigger>;

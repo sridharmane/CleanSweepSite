@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { PartnerKeysPipe } from '../../pipes/partner-keys.pipe';
-import { PartnerCategoriesPipe } from '../../pipes/partner-categories.pipe';
+
 import { Partner } from '../../types/partner';
 import { FirebaseListObservable } from 'angularfire2';
 
 
 @Component({
   selector: 'app-partners',
-  pipes: [PartnerKeysPipe, PartnerCategoriesPipe],
   templateUrl: 'partners.component.html',
   styleUrls: [
     'partners.component.scss'

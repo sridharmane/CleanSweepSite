@@ -4,7 +4,6 @@ import {Partner} from '../../types/partner';
 
 @Component({
   selector: 'app-partner-categories',
-  pipes: [],
   templateUrl: 'partner-categories.component.html',
   styleUrls: ['partner-categories.component.scss']
 })
