@@ -14,6 +14,7 @@ import { ListCleanSweepsComponent }   from './components/clean-sweeps/list-clean
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
+    { path: 'home', component: HomeComponent },
     {
         path: 'cleansweeps', component: CleanSweepsComponent,
         children: [
