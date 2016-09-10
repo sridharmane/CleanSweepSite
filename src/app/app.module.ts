@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /**
  * angularfire2 
  * */
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthMethods, AuthProviders, firebaseAuthConfig, FirebaseAuthConfig } from 'angularfire2';
 /**
  * angular2-material 
  * */
@@ -19,7 +19,7 @@ import {MdInputModule} from '@angular2-material/input';
 import {MdListModule} from '@angular2-material/list';
 import {MdMenuModule} from '@angular2-material/menu';
 import {MdProgressCircleModule} from '@angular2-material/progress-circle';
-import {MdRadioModule} from '@angular2-material/radio';
+import {MdRadioModule, MdUniqueSelectionDispatcher} from '@angular2-material/radio';
 import {MdSidenavModule} from '@angular2-material/sidenav';
 // import {MdSlideToggleModule} from '@angular2-material/slide-toggle';
 // import {MdSliderModule} from '@angular2-material/slider';
@@ -47,10 +47,13 @@ import { PartnersComponent } from './components/partners';
 import { PartnerCategoriesComponent } from './components/partner-categories';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { LoginComponent } from './components/login';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 /**
  * Services 
  * */
+import {AuthService} from './services/auth.service';
 import {GeocodingService} from './services/geocoding.service';
 import {DataService} from './services/data.service';
 import {DateTimeService} from './services/date-time.service';
@@ -64,11 +67,19 @@ import { MonthNamesPipe } from './pipes/month-names.pipe';
 import { PartnerKeysPipe } from './pipes/partner-keys.pipe';
 import { PartnerCategoriesPipe } from './pipes/partner-categories.pipe';
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyBhyEI4oMWsqGK_Jb81q9Sbm7YTZwfnikg',
+
+
+const firebaseAppConfig = {
+  apiKey: 'AIzaSyA-xHEbkhLk9ZLmycfIPEJhArQskJKrxvA',
+  
   authDomain: 'cleansweep-f63d0.firebaseapp.com',
   databaseURL: 'https://cleansweep-f63d0.firebaseio.com',
-  storageBucket: ''
+  storageBucket: 'cleansweep-f63d0.appspot.com',
+};
+const myFirebaseAuthConfig = {
+  provider: AuthProviders.Password,
+  method: AuthMethods.Password
+
 };
 
 @NgModule({
@@ -88,7 +99,9 @@ const firebaseConfig = {
     CategorizeByDatePipe,
     MonthNamesPipe,
     PartnerKeysPipe,
-    PartnerCategoriesPipe
+    PartnerCategoriesPipe,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     routing,
@@ -112,16 +125,19 @@ const firebaseConfig = {
     MdTabsModule,
     MdToolbarModule,
     MdTooltipModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseAppConfig, myFirebaseAuthConfig),
+
 
   ],
   providers: [
     appRoutingProviders,
+    AuthService,
     GeocodingService,
     DataService,
     DateTimeService,
     MdIconRegistry,
-    OVERLAY_PROVIDERS
+    OVERLAY_PROVIDERS,
+    MdUniqueSelectionDispatcher
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]

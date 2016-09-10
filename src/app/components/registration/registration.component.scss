@@ -1,0 +1,41 @@
+.form-row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  md-input{
+    flex: 1;
+    margin: 1px;
+    width:100%;
+    // margin-right: 16px;
+    // width: 100%;
+  }
+  
+}
+.error{
+    .md-input-wrapper{
+        .md-input-underline{
+            border-top: red 2px solid;
+        }
+    }
+    
+}
+.error-message {
+    position: relative;
+    span {
+      position: absolute;
+      color: red;
+      top: -15px;
+      font-size:0.63em;
+    }
+  }
+.ng-invalid{
+    // border-top: red 2px solid;
+    .md-input-wrapper{
+        .md-input-underline{
+            border-top: red 2px solid !important;
+        }
+    }
+}
+.ng-dirty{
+    // border-top: darkorange 2px solid;
+}

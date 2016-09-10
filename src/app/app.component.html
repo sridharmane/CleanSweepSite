@@ -2,12 +2,17 @@
   <!--<button md-icon-button color="secondary" (click)="toggleSidenav()">
         <md-icon class="md-48">menu_vert</md-icon>
     </button>-->
-  <span>Clean Sweep Buffalo </span>
+  <img class="logo" src="buffalo.jpg" />
+  <span class="title">Clean Sweep Buffalo </span>
   <!--<span> {{title}}</span>-->
+  <span class="profile" [md-menu-trigger-for]="profileMenu">
+    <span class="name">Sridhar Mane</span>
+    <img class="avatar" src="http://lorempixel.com/100/100" />
+  </span>
 </md-toolbar>
 <md-sidenav-layout>
   <md-sidenav #start (open)="mybutton.focus()" class="sidenav-main" mode="side" [opened]="sidenavOpened">
-    <md-toolbar>Menu</md-toolbar>
+    <!--<md-toolbar>Menu</md-toolbar>-->
     <md-nav-list>
       <md-list-item *ngFor="let page of pages" [routerLink]="page.routerLink">
         <a md-line>{{ page.title }}</a>
@@ -20,3 +25,10 @@
   </md-sidenav>
   <router-outlet></router-outlet>
 </md-sidenav-layout>
+
+<md-menu #profileMenu="mdMenu">
+  <!--<button md-menu-item> <md-icon>person</md-icon><span>Profile Settings </span></button>
+  <button md-menu-item> <md-icon>exit_to_app</md-icon> Sign Out </button>-->
+  <button md-menu-item> Profile Settings </button>
+  <button md-menu-item> Sign Out </button>
+</md-menu>

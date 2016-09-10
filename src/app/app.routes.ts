@@ -1,10 +1,12 @@
 // import { provideRouter, RouterConfig } from '@angular/router';
 import { Routes, RouterModule } from '@angular/router';
 // import { AppComponent  } from './app.component';
+import { LoginComponent } from './components/login';
+import { RegistrationComponent } from './components/registration/registration.component';
 import { HomeComponent } from './components/home';
 import { PartnersComponent } from './components/partners';
 import { PartnerCategoriesComponent } from './components/partner-categories';
-import {PageNotFoundComponent} from './components/page-not-found';
+import { PageNotFoundComponent } from './components/page-not-found';
 
 import { CleanSweepsComponent } from './components/clean-sweeps';
 import { DetailCleanSweepComponent } from './components/clean-sweeps/detail-clean-sweep';
@@ -14,6 +16,8 @@ import { ListCleanSweepsComponent }   from './components/clean-sweeps/list-clean
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'registration', component: RegistrationComponent },
     { path: 'home', component: HomeComponent },
     {
         path: 'cleansweeps', component: CleanSweepsComponent,
