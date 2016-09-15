@@ -49,10 +49,12 @@ import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginComponent } from './components/login';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { OverlaySpinnerComponent } from './components/overlay-spinner';
 
 /**
  * Services 
  * */
+import {AuthGuardService} from './services/auth-guard.service';
 import {AuthService} from './services/auth.service';
 import {GeocodingService} from './services/geocoding.service';
 import {DataService} from './services/data.service';
@@ -66,6 +68,10 @@ import { CategorizeByDatePipe } from './pipes/categorize-by-date.pipe';
 import { MonthNamesPipe } from './pipes/month-names.pipe';
 import { PartnerKeysPipe } from './pipes/partner-keys.pipe';
 import { PartnerCategoriesPipe } from './pipes/partner-categories.pipe';
+/**
+ * Directives 
+ * */
+
 
 
 
@@ -101,7 +107,8 @@ const myFirebaseAuthConfig = {
     PartnerKeysPipe,
     PartnerCategoriesPipe,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    OverlaySpinnerComponent
   ],
   imports: [
     routing,
@@ -131,6 +138,7 @@ const myFirebaseAuthConfig = {
   ],
   providers: [
     appRoutingProviders,
+    AuthGuardService,
     AuthService,
     GeocodingService,
     DataService,

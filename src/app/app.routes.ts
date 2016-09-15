@@ -1,5 +1,7 @@
 // import { provideRouter, RouterConfig } from '@angular/router';
 import { Routes, RouterModule } from '@angular/router';
+
+import { AuthGuardService } from './services/auth-guard.service';
 // import { AppComponent  } from './app.component';
 import { LoginComponent } from './components/login';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -15,12 +17,14 @@ import { EditCleanSweepComponent } from './components/clean-sweeps/edit-clean-sw
 import { ListCleanSweepsComponent }   from './components/clean-sweeps/list-clean-sweeps';
 
 const appRoutes: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '', component: HomeComponent, canActivate: [AuthGuardService] },
     { path: 'login', component: LoginComponent },
-    { path: 'registration', component: RegistrationComponent },
-    { path: 'home', component: HomeComponent },
+    { path: 'register', component: RegistrationComponent },
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
     {
-        path: 'cleansweeps', component: CleanSweepsComponent,
+        path: 'cleansweeps',
+        component: CleanSweepsComponent,
+        canActivate: [AuthGuardService],
         children: [
             { path: ':id', component: DetailCleanSweepComponent },
             { path: ':id/edit', component: EditCleanSweepComponent },
@@ -30,10 +34,15 @@ const appRoutes: Routes = [
         ]
 
     },
-    { path: 'partner-categories', component: PartnerCategoriesComponent },
+    {
+        path: 'partner-categories',
+        component: PartnerCategoriesComponent,
+        canActivate: [AuthGuardService]
+    },
     {
         path: 'partners',
         component: PartnersComponent,
+        canActivate: [AuthGuardService],
         data: {
             title: 'Heroes List'
         }

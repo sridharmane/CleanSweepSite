@@ -1,5 +1,5 @@
 <md-toolbar>
-  <span class="fill-remaining-space">Login</span>
+  <span class="fill-remaining-space">Register</span>
 </md-toolbar>
 <form #registrationForm="ngForm" [formGroup]="form" (ngSubmit)="submit(registrationForm.value)">
   <md-card>
@@ -8,10 +8,10 @@
         <md-input placeholder="Full Name" formControlName="name"></md-input>
       </div>
       <div class="form-row">
-        <md-input placeholder="Email"  formControlName="email" [dividerColor]="email.valid?warn:primary"></md-input>
+        <md-input placeholder="Email" formControlName="email" [dividerColor]="email.valid?warn:primary"></md-input>
         <!--<span>{{registrationForm.controls['email'].valid}}</span>-->
-         <!--<div *ngIf="!email.valid" class="ui error message">Invalid</div>-->
-         <!--<div *ngIf="email.valid" class="ui error message">Valid</div>-->
+        <!--<div *ngIf="!email.valid" class="ui error message">Invalid</div>-->
+        <!--<div *ngIf="email.valid" class="ui error message">Valid</div>-->
       </div>
       <div class="form-row">
         <md-input type="password" placeholder="Password" formControlName="password"></md-input>
@@ -24,11 +24,14 @@
           <md-radio-button value="manager">Manager</md-radio-button>
         </md-radio-group>
       </div>
+      <span class="error">{{errorMessage}}</span>
+      <span>{{statusMessage}}</span>
     </md-card-content>
     <md-card-actions>
       <button md-button color="primary" type="submit" [disabled]="!registrationForm.valid">REGISTER USER</button>
       <button md-button color="warn" type="reset" (click)="cancel()">CANCEL</button>
     </md-card-actions>
   </md-card>
+  <app-overlay-spinner *ngIf="inProgress"></app-overlay-spinner>
 </form>
 <div>{{registrationForm.value | json }}</div>

@@ -11,21 +11,24 @@ import { CustomFormValidators } from '../../validators/custom-form-validators';
 export class RegistrationComponent implements OnInit {
   form: FormGroup;
   email: AbstractControl;
+  inProgress: boolean = false;
+  errorMessage:string = '';
+  statusMessage: string = '';
 
   constructor(private fb: FormBuilder, private as: AuthService) {
     this.form = this.fb.group({
-      name: ['', [Validators.minLength(3), Validators.required]],
-      email: ['', [Validators.required]],
+      name: ['First LastLast', [Validators.minLength(3), Validators.required]],
+      email: ['first.last@firstlast.com', [Validators.required]],
       // email: ['', [Validators.required, CustomFormValidators.email]],
-      password: ['', [Validators.minLength(3), Validators.required]],
-      passwordConfirm: ['', [Validators.minLength(3), Validators.required]],
-      type: ['', [Validators.minLength(3), Validators.required]]
+      password: ['firstlast', [Validators.minLength(3), Validators.required]],
+      passwordConfirm: ['firstlast', [Validators.minLength(3), Validators.required]],
+      type: ['admin', [Validators.minLength(3), Validators.required]]
     });
 
     this.form.valueChanges
       // .filter((value) => this.addCleanSweepForm.valid)
       .subscribe(validValue => {
-        console.log(validValue);
+        // console.log(validValue);
       });
     this.email = this.form.controls['email'];
   }
@@ -35,12 +38,21 @@ export class RegistrationComponent implements OnInit {
 
   submit(formData) {
     console.log('Submiting Form with data:', formData);
-
+    this.inProgress = true;
     this.as.register({
+      uid: null,
       email: formData.email,
       password: formData.password,
       name: formData.name,
       type: formData.type
+    }).subscribe(success=>{
+      this.inProgress = false;
+      this.statusMessage = success.message;
+      console.log('Got in RegistrationComponent ',success);
+    },
+    error=>{
+      this.errorMessage = error;
+      console.log('Got in RegistrationComponent ',error);
     });
   }
 

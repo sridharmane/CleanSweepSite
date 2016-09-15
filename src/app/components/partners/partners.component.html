@@ -1,11 +1,10 @@
-<md-card>
-<md-toolbar class="toolbar-background" color="primary">
+<md-toolbar>
   <span class="fill-remaining-space">Partners</span>
   <button md-icon-button color="secondary">
         <md-icon class="md-48">add</md-icon>
     </button>
 </md-toolbar>
-<!--<md-card>-->
+<md-card>
   <md-card-content>
     <md-list>
       <md-list-item>
@@ -33,7 +32,7 @@
     </md-list>
     <md-list dense>
       <!--<div *ngFor="let category of partners | partnerCategories">-->
-        <div *ngFor="let category of partners | async | partnerCategories">
+      <div *ngFor="let category of partners | async | partnerCategories">
         <h3 md-subheader class="category">{{category.name}}</h3>
         <md-list-item *ngFor="let partner of category.partners">
 

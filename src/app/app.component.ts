@@ -3,6 +3,8 @@ import { HomeComponent } from './components/home';
 import { CleanSweepsComponent } from './components/clean-sweeps';
 import { PartnersComponent } from './components/partners';
 import { PartnerCategoriesComponent } from './components/partner-categories';
+import { AuthService } from './services/auth.service';
+import { UserData } from './types/user-data';
 import 'hammerjs';
 import * as firbase from 'firebase';
 
@@ -19,6 +21,8 @@ export class AppComponent {
   title = 'Home';
   sidenavOpened: boolean = true;
   streetAddresses: Array<any>;
+  userData: UserData = null;
+
   pages = [
     {
       title: 'Home',
@@ -43,10 +47,15 @@ export class AppComponent {
   ];
 
   // cleanSweep: Array<CleanSweep>;
-  constructor() {
-
+  constructor(private authService: AuthService) {
+    this.authService.authEvents.subscribe((event) => {
+      console.log(event.type, event.userData);
+      this.userData = event.userData;
+    });
+    // this.currentUser = new User({});
   }
   toggleSidenav() {
     this.sidenavOpened = !this.sidenavOpened;
   }
+
 }

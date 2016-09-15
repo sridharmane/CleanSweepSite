@@ -2,18 +2,28 @@
   <!--<button md-icon-button color="secondary" (click)="toggleSidenav()">
         <md-icon class="md-48">menu_vert</md-icon>
     </button>-->
-  <img class="logo" src="buffalo.jpg" />
-  <span class="title">Clean Sweep Buffalo </span>
-  <!--<span> {{title}}</span>-->
-  <span class="profile" [md-menu-trigger-for]="profileMenu">
-    <span class="name">Sridhar Mane</span>
-    <img class="avatar" src="http://lorempixel.com/100/100" />
-  </span>
+  <md-icon class="logo-main noselect">public</md-icon>
+
+  <span class="title-main noselect">Clean Sweep</span>
+  <span class="full-width"></span>
+
+  <button md-button [md-menu-trigger-for]="profileMenu" *ngIf="userData">
+    <span class="profile noselect">
+      <span class="name-user">{{userData.name}}</span>
+      <img class="avatar" src="http://lorempixel.com/100/100" />
+    </span>
+  </button>
+  <button md-button *ngIf="!userData" [routerLink]="['/login']">
+    Log In
+  </button>
 </md-toolbar>
 <md-sidenav-layout>
   <md-sidenav #start (open)="mybutton.focus()" class="sidenav-main" mode="side" [opened]="sidenavOpened">
+
+    <img class="logo-city" src="buffalo.png" />
+    <h3 class="title-city">Buffalo NY</h3>
     <!--<md-toolbar>Menu</md-toolbar>-->
-    <md-nav-list>
+    <md-nav-list *ngIf="authService.isLoggedIn">
       <md-list-item *ngFor="let page of pages" [routerLink]="page.routerLink">
         <a md-line>{{ page.title }}</a>
         <!--<button md-icon-button>-->
@@ -21,7 +31,16 @@
         <!--</button>-->
       </md-list-item>
     </md-nav-list>
-    <button md-button #mybutton (click)="toggleSidenav()">Close</button>
+    <md-nav-list *ngIf="!authService.isLoggedIn">
+      <md-list-item [routerLink]="['/login']">
+        <a md-line>Log In</a>
+        <md-icon>input</md-icon>
+      </md-list-item>
+      <md-list-item [routerLink]="['/register']">
+        <a md-line>Register</a>
+        <md-icon>person_add</md-icon>
+      </md-list-item>
+    </md-nav-list>
   </md-sidenav>
   <router-outlet></router-outlet>
 </md-sidenav-layout>
@@ -30,5 +49,5 @@
   <!--<button md-menu-item> <md-icon>person</md-icon><span>Profile Settings </span></button>
   <button md-menu-item> <md-icon>exit_to_app</md-icon> Sign Out </button>-->
   <button md-menu-item> Profile Settings </button>
-  <button md-menu-item> Sign Out </button>
+  <button md-menu-item (click)="logout()"> Log Out </button>
 </md-menu>

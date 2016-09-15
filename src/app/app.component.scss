@@ -1,8 +1,8 @@
 // import 'style!@angular2-material/core/style/core.css';
 // import 'style!@angular2-material/core/overlay/overlay.css';
+$fontFamily : Roboto,"Helvetica Neue",sans-serif;
 body {
-  font-family: 'Roboto Condensed', sans-serif;
-
+  font-family: $fontFamily;
   // Helps fonts on OSX looks more consistent with other systems
   // Isn't currently in button styles due to performance concerns
   * {
@@ -16,7 +16,7 @@ body {
     padding: 32px;
   }
 md-card{
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: $fontFamily;
   padding: 0;
   background-color: green;
   md-toolbar{
@@ -31,15 +31,9 @@ md-card{
 }
 
   md-toolbar {
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: $fontFamily;
     md-icon {
       cursor: pointer;
-    }
-
-    .demo-toolbar {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
     }
   }
 
@@ -51,7 +45,33 @@ md-card{
 .demo-secondary-text {
   color: rgba(0, 0, 0, 0.54);
 }
+.logo-main{
+  font-size: 48px;
+    line-height: 24px;
+    width: 48px;
+    cursor: pointer;
+}
+.title-main{
+  cursor: pointer;
+  margin-left: 5px;
+}
 .sidenav-main {
+  .logo-city{
+      width: 120px;
+      margin: 0 auto;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      display: block;
+      // margin-right: 15px;
+      // background-image: url("buffalo.jpg");
+      // background-repeat: no-repeat;
+      // background-size: contain;
+    }
+    .title-city{
+      text-align: center;
+      margin-top: 0px;
+      font-family: $fontFamily;
+    }
     min-width: 25%;
 
     [md-button] {
@@ -74,13 +94,8 @@ md-card{
     // background: white;
     color: black;
     display: flex;
-    .logo{
-      width: 65px;
-      margin: 0px 15px;
-      background-image: url("buffalo.jpg");
-      background-repeat: no-repeat;
-      background-size: contain;
-    }
+    border-radius: 0px;
+    z-index: 10;
     .title{
       flex: 1 1 auto;
     }
@@ -128,4 +143,12 @@ md-card{
     overflow: scroll;
     // height: 100%;
     // border-color: rgba(0, 0, 0, 0.54);
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
 }

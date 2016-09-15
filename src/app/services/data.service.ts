@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CleanSweep } from '../types/clean-sweep';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 // import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { Partner } from '../types/partner';
+import { UserData } from '../types/user-data';
 
 @Injectable()
 export class DataService {
   cleanSweeps: FirebaseListObservable<any[]>;
   partners: FirebaseListObservable<any[]>;
   partnerCategories: FirebaseListObservable<any[]>;
+  user: FirebaseObjectObservable<any>;
 
   constructor(private af: AngularFire) {
     this.cleanSweeps = af.database.list('/cleanSweeps');
@@ -50,8 +52,20 @@ export class DataService {
     list.subscribe((data) => {
       console.log(data);
     });
+  }
 
-
+  getUserDetails(userId:string){
+    this.user = this.af.database.object('/users/',userId);
+    return this.user;
+  }
+  setUserDetails(userData: UserData){
+    this.user = this.af.database.object('/users/'+userData.uid);
+    this.user.set({ 
+      name: userData.name,
+      email: userData.email,
+      type: userData.type
+    });
+    return this.user;
   }
 
 }
