@@ -10,30 +10,31 @@ import { PartnersComponent } from './components/partners';
 import { PartnerCategoriesComponent } from './components/partner-categories';
 import { PageNotFoundComponent } from './components/page-not-found';
 
-import { CleanSweepsComponent } from './components/clean-sweeps';
-import { DetailCleanSweepComponent } from './components/clean-sweeps/detail-clean-sweep';
-import { AddCleanSweepComponent } from './components/clean-sweeps/add-clean-sweep';
-import { EditCleanSweepComponent } from './components/clean-sweeps/edit-clean-sweep';
-import { ListCleanSweepsComponent }   from './components/clean-sweeps/list-clean-sweeps';
+// import { CleanSweepsModule } from './components/clean-sweeps';
+// import { DetailCleanSweepComponent } from './components/clean-sweeps/detail-clean-sweep';
+// import { AddCleanSweepComponent } from './components/clean-sweeps/add-clean-sweep';
+// import { EditCleanSweepComponent } from './components/clean-sweeps/edit-clean-sweep';
+// import { ListCleanSweepsComponent }   from './components/clean-sweeps/list-clean-sweeps';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuardService] },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegistrationComponent },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
-    {
-        path: 'cleansweeps',
-        component: CleanSweepsComponent,
-        canActivate: [AuthGuardService],
-        children: [
-            { path: ':id', component: DetailCleanSweepComponent },
-            { path: ':id/edit', component: EditCleanSweepComponent },
-            { path: '', component: ListCleanSweepsComponent },
-            { path: 'list', component: ListCleanSweepsComponent },
-            { path: 'add', component: AddCleanSweepComponent }
-        ]
+    // {
+    //     path: 'cleansweeps',
+    //     component: CleanSweepsComponent,
+    //     canActivate: [AuthGuardService],
+    //     children: [
+    //         { path: ':id', component: DetailCleanSweepComponent },
+    //         { path: ':id/edit', component: EditCleanSweepComponent },
+    //         { path: '', component: ListCleanSweepsComponent },
+    //         { path: 'list', component: ListCleanSweepsComponent },
+    //         { path: 'add', component: AddCleanSweepComponent }
+    //     ]
 
-    },
+    // },
+
     {
         path: 'partner-categories',
         component: PartnerCategoriesComponent,

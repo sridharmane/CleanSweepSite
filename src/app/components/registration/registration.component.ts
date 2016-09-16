@@ -39,6 +39,7 @@ export class RegistrationComponent implements OnInit {
   submit(formData) {
     console.log('Submiting Form with data:', formData);
     this.inProgress = true;
+    this.errorMessage = '';
     this.as.register({
       uid: null,
       email: formData.email,
@@ -57,7 +58,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   cancel() {
-
+    this.errorMessage = '';
   }
 
 }

@@ -24,8 +24,10 @@
           <md-radio-button value="manager">Manager</md-radio-button>
         </md-radio-group>
       </div>
-      <span class="error">{{errorMessage}}</span>
-      <span>{{statusMessage}}</span>
+      <!--<div class="form-row">-->
+      <span class="error" *ngIf="errorMessage">{{errorMessage}}</span>
+      <!--</div>-->
+      
     </md-card-content>
     <md-card-actions>
       <button md-button color="primary" type="submit" [disabled]="!registrationForm.valid">REGISTER USER</button>

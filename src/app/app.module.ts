@@ -36,13 +36,13 @@ import {routing, appRoutingProviders} from './app.routes';
  * Components 
  * */
 import { AppComponent } from './app.component';
-import {
-  CleanSweepsComponent,
-  AddCleanSweepComponent,
-  EditCleanSweepComponent,
-  ListCleanSweepsComponent,
-  DetailCleanSweepComponent
-} from './components/clean-sweeps/';
+// import {
+//   CleanSweepsComponent,
+//   AddCleanSweepComponent,
+//   EditCleanSweepComponent,
+//   ListCleanSweepsComponent,
+//   DetailCleanSweepComponent
+// } from './components/clean-sweeps/';
 import { PartnersComponent } from './components/partners';
 import { PartnerCategoriesComponent } from './components/partner-categories';
 import { HomeComponent } from './components/home/home.component';
@@ -73,7 +73,10 @@ import { PartnerCategoriesPipe } from './pipes/partner-categories.pipe';
  * */
 
 
-
+/**
+ * Modules
+ */
+import { CleanSweepsModule } from './components/clean-sweeps';
 
 const firebaseAppConfig = {
   apiKey: 'AIzaSyA-xHEbkhLk9ZLmycfIPEJhArQskJKrxvA',
@@ -91,16 +94,17 @@ const myFirebaseAuthConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    CleanSweepsComponent,
-    AddCleanSweepComponent,
-    EditCleanSweepComponent,
-    ListCleanSweepsComponent,
-    DetailCleanSweepComponent,
+    // CleanSweepsModule,
+    // CleanSweepsComponent,
+    // AddCleanSweepComponent,
+    // EditCleanSweepComponent,
+    // ListCleanSweepsComponent,
+    // DetailCleanSweepComponent,
     PartnersComponent,
     PartnerCategoriesComponent,
     HomeComponent,
     PageNotFoundComponent,
-    CleanSweepsComponent,
+    // CleanSweepsComponent,
     StreetNamesPipe,
     CategorizeByDatePipe,
     MonthNamesPipe,
@@ -116,6 +120,8 @@ const myFirebaseAuthConfig = {
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+
+    CleanSweepsModule,
 
     MdCoreModule,
     MdButtonModule,
