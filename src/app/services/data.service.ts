@@ -13,7 +13,12 @@ export class DataService {
   user: FirebaseObjectObservable<any>;
 
   constructor(private af: AngularFire) {
-    this.cleanSweeps = af.database.list('/cleanSweeps');
+    this.cleanSweeps = af.database.list('/cleanSweeps', {
+      query: {
+        limitToLast: 10,
+        orderByChild: 'date',
+      }
+    });
     this.partners = af.database.list('/partners');
     this.partnerCategories = af.database.list('/partnerCategories');
   }
@@ -54,13 +59,13 @@ export class DataService {
     });
   }
 
-  getUserDetails(userId:string){
-    this.user = this.af.database.object('/users/',userId);
+  getUserDetails(userId: string) {
+    this.user = this.af.database.object('/users/', userId);
     return this.user;
   }
-  setUserDetails(userData: UserData){
-    this.user = this.af.database.object('/users/'+userData.uid);
-    this.user.set({ 
+  setUserDetails(userData: UserData) {
+    this.user = this.af.database.object('/users/' + userData.uid);
+    this.user.set({
       name: userData.name,
       email: userData.email,
       type: userData.type

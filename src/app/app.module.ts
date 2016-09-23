@@ -76,6 +76,10 @@ import { PipesModule } from './pipes/pipes.module';
  */
 // import { CleanSweepsModule } from './components/clean-sweeps';
 
+
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+
+
 const firebaseAppConfig = {
   apiKey: 'AIzaSyA-xHEbkhLk9ZLmycfIPEJhArQskJKrxvA',
   authDomain: 'cleansweep-f63d0.firebaseapp.com',
@@ -140,7 +144,8 @@ const myFirebaseAuthConfig = {
     DateTimeService,
     MdIconRegistry,
     OVERLAY_PROVIDERS,
-    MdUniqueSelectionDispatcher
+    MdUniqueSelectionDispatcher,
+    CookieService
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]

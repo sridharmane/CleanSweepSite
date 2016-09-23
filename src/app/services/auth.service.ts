@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,13 @@ export class AuthService {
   redirectUrl: string;
   authEvents: EventEmitter<AuthEventData> = new EventEmitter();
 
-  constructor(private af: AngularFire, private ds: DataService, private router: Router) {
+  constructor(private af: AngularFire, private ds: DataService, private router: Router, private cs: CookieService) {
+    if (this.getAuthCookie()) {
+      console.log(this.getAuthCookie());
+      this.isLoggedIn = true;
+    }else {
+      console.log('No Auth Cookie Found');
+    }
 
   }
 
@@ -29,6 +36,9 @@ export class AuthService {
       }
       this.af.auth.login(credentials).then(authData => {
         console.log('Login Success: ', authData);
+        // Set the Cookie
+        this.setAuthCookie(authData);
+
         this.isLoggedIn = true;
         resolve(authData);
         if (this.redirectUrl) {
@@ -73,6 +83,10 @@ export class AuthService {
           data: authData,
           message: 'Account created'
         });
+
+        // Set the Cookie
+        this.setAuthCookie(authData);
+
         userData.uid = authData.uid;
         observer.next({
           data: authData,
@@ -122,6 +136,20 @@ export class AuthService {
   logout() {
     this.af.auth.logout();
     this.isLoggedIn = false;
+    this.clearAuthCookie();
     console.log('Log Off Done !');
+  }
+
+  setAuthCookie(auth: any) {
+    console.log('Setting Auth Cookie', auth);
+
+    this.cs.putObject('cleanSweepAuth', auth);
+  }
+  getAuthCookie(): any {
+    return this.cs.getObject('cleanSweepAuth');
+
+  }
+  clearAuthCookie() {
+    this.cs.remove('cleanSweepAuth');
   }
 }
