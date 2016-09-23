@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /**
  * angularfire2 
@@ -30,19 +30,21 @@ import {MdTooltipModule} from '@angular2-material/tooltip';
 /**
  * Routes 
  * */
-import {routing, appRoutingProviders} from './app.routes';
+import { appRouting, appRoutingProviders } from './app.routes';
 
 /**
  * Components 
  * */
 import { AppComponent } from './app.component';
-// import {
-//   CleanSweepsComponent,
-//   AddCleanSweepComponent,
-//   EditCleanSweepComponent,
-//   ListCleanSweepsComponent,
-//   DetailCleanSweepComponent
-// } from './components/clean-sweeps/';
+// import { CleanSweepsComponent }  from './components/clean-sweeps';
+
+import {
+  CleanSweepsComponent,
+  AddCleanSweepComponent,
+  EditCleanSweepComponent,
+  ListCleanSweepsComponent,
+  DetailCleanSweepComponent
+} from './components/clean-sweeps/';
 import { PartnersComponent } from './components/partners';
 import { PartnerCategoriesComponent } from './components/partner-categories';
 import { HomeComponent } from './components/home/home.component';
@@ -63,11 +65,7 @@ import {DateTimeService} from './services/date-time.service';
 /**
  * Pipes 
  * */
-import { StreetNamesPipe } from './pipes/street-names.pipe';
-import { CategorizeByDatePipe } from './pipes/categorize-by-date.pipe';
-import { MonthNamesPipe } from './pipes/month-names.pipe';
-import { PartnerKeysPipe } from './pipes/partner-keys.pipe';
-import { PartnerCategoriesPipe } from './pipes/partner-categories.pipe';
+import { PipesModule } from './pipes/pipes.module';
 /**
  * Directives 
  * */
@@ -76,11 +74,10 @@ import { PartnerCategoriesPipe } from './pipes/partner-categories.pipe';
 /**
  * Modules
  */
-import { CleanSweepsModule } from './components/clean-sweeps';
+// import { CleanSweepsModule } from './components/clean-sweeps';
 
 const firebaseAppConfig = {
   apiKey: 'AIzaSyA-xHEbkhLk9ZLmycfIPEJhArQskJKrxvA',
-  
   authDomain: 'cleansweep-f63d0.firebaseapp.com',
   databaseURL: 'https://cleansweep-f63d0.firebaseio.com',
   storageBucket: 'cleansweep-f63d0.appspot.com',
@@ -94,53 +91,45 @@ const myFirebaseAuthConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    // CleanSweepsModule,
-    // CleanSweepsComponent,
-    // AddCleanSweepComponent,
-    // EditCleanSweepComponent,
-    // ListCleanSweepsComponent,
-    // DetailCleanSweepComponent,
     PartnersComponent,
     PartnerCategoriesComponent,
     HomeComponent,
     PageNotFoundComponent,
-    // CleanSweepsComponent,
-    StreetNamesPipe,
-    CategorizeByDatePipe,
-    MonthNamesPipe,
-    PartnerKeysPipe,
-    PartnerCategoriesPipe,
     LoginComponent,
     RegistrationComponent,
-    OverlaySpinnerComponent
+    OverlaySpinnerComponent,
+    CleanSweepsComponent,
+    AddCleanSweepComponent,
+    EditCleanSweepComponent,
+    ListCleanSweepsComponent,
+    DetailCleanSweepComponent
   ],
   imports: [
-    routing,
+    appRouting,
     BrowserModule,
-    CommonModule,
+    // CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    // CleanSweepsModule,
 
-    CleanSweepsModule,
-
-    MdCoreModule,
-    MdButtonModule,
-    MdCardModule,
-    MdCheckboxModule,
-    MdGridListModule,
-    MdIconModule,
-    MdInputModule,
-    MdListModule,
-    MdMenuModule,
-    MdProgressCircleModule,
-    MdRadioModule,
-    MdSidenavModule,
-    MdTabsModule,
-    MdToolbarModule,
-    MdTooltipModule,
+    MdCoreModule.forRoot(),
+    MdButtonModule.forRoot(),
+    MdCardModule.forRoot(),
+    MdCheckboxModule.forRoot(),
+    MdGridListModule.forRoot(),
+    MdIconModule.forRoot(),
+    MdInputModule.forRoot(),
+    MdListModule.forRoot(),
+    MdMenuModule.forRoot(),
+    MdProgressCircleModule.forRoot(),
+    MdRadioModule.forRoot(),
+    MdSidenavModule.forRoot(),
+    MdTabsModule.forRoot(),
+    MdToolbarModule.forRoot(),
+    MdTooltipModule.forRoot(),
     AngularFireModule.initializeApp(firebaseAppConfig, myFirebaseAuthConfig),
-
-
+    // Pipes
+    PipesModule
   ],
   providers: [
     appRoutingProviders,
