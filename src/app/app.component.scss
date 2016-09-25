@@ -56,6 +56,7 @@ md-card{
   margin-left: 5px;
 }
 .sidenav-main {
+
   .logo-city{
       width: 120px;
       margin: 0 auto;
@@ -87,7 +88,7 @@ md-card{
     transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
     will-change: box-shadow;
     display: block;
-    position: relative;
+    position: fixed;
     // padding: 24px;
     border-radius: 2px;
     font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -96,6 +97,9 @@ md-card{
     display: flex;
     border-radius: 0px;
     z-index: 10;
+
+
+
     .title{
       flex: 1 1 auto;
     }
@@ -116,6 +120,9 @@ md-card{
         margin: 0px 7.5px;
       }
     }
+}
+.sidenav-layout{
+  top: 64px;
 }
 
 ///MINE
