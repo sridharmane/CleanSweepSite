@@ -4,6 +4,8 @@ import { DateTimeService } from '../../../services/date-time.service';
 import { FirebaseListObservable } from 'angularfire2';
 import { CleanSweepEventData } from '../../../types/clean-sweep-event-data';
 
+const ORDER_ASCENDING = 'ascending';
+const ORDER_DESCENDING = 'descending';
 
 @Component({
   selector: 'app-list-clean-sweeps',
@@ -14,11 +16,20 @@ export class ListCleanSweepsComponent implements OnInit {
   // @ViewChildren(MdMenuTrigger) triggers: QueryList<MdMenuTrigger>;
 
   cleanSweeps: FirebaseListObservable<any[]>;
+  cleanSweepsSubscription: any;
   currentKey: string = '';
+  pagesLoaded: number = 1;
   @Output() cleanSweepEvents = new EventEmitter<CleanSweepEventData>();
 
-  constructor(ds: DataService, private nz: NgZone, private dt: DateTimeService) {
+  order = ORDER_DESCENDING;
+
+  constructor(private ds: DataService, private nz: NgZone, private dt: DateTimeService) {
     this.cleanSweeps = ds.cleanSweeps;
+    this.cleanSweeps.subscribe(data => {
+      console.log('Clean Sweep List data: ', data);
+
+    });
+
 
     // this.cleanSweeps.subscribe(() => {
     // this.triggers.changes.subscribe((data) => {
@@ -68,5 +79,18 @@ export class ListCleanSweepsComponent implements OnInit {
   }
   getDayFromDate(date: string): string {
     return this.dt.getDayWithOrdinal(date).slice(0, -2);
+  }
+
+  loadMore() {
+    this.pagesLoaded++;
+    this.ds.loadNext10CleanSweeps(this.pagesLoaded);
+  }
+
+  toggleOrder() {
+    if (this.order === ORDER_ASCENDING) {
+      this.order = ORDER_DESCENDING;
+    } else if (this.order === ORDER_DESCENDING) {
+      this.order = ORDER_ASCENDING;
+    }
   }
 }

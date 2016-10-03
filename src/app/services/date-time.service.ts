@@ -11,6 +11,7 @@ export class DateTimeService {
   private _defaultTimeFormat = 'h:mm a';
 
   monthNames: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  monthNamesReverse: string[] = ['Dec', 'Nov', 'Oct', 'Sept', 'Aug', 'Jul', 'Jun', 'May', 'Apr', 'Mar', 'Feb', 'Jan'];
 
   constructor() {
     this._now = moment().format();

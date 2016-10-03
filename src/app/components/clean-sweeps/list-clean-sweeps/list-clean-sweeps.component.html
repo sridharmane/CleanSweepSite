@@ -1,14 +1,14 @@
 <md-card>
   <md-toolbar>
     <span class="fill-remaining-space">Clean Sweeps</span>
-    <!--<button md-icon-button color="secondary">
-        <md-icon class="md-48">add</md-icon>
-    </button>-->
+    <button md-icon-button color="secondary" (click)="toggleOrder()">
+        <md-icon class="md-48">sort</md-icon>
+    </button>
   </md-toolbar>
   <md-card-content *ngIf="cleanSweeps">
-    <div *ngFor="let category of cleanSweeps | async | categorizeByDate : 'month'; let i = index;">
+    <div *ngFor="let category of cleanSweeps | async | categorizeByDate : 'month' : order; let i = index;">
       <md-list *ngIf="category">
-        <h3 class="subheader" md-subheader *ngIf="category">{{i | monthNames}}</h3>
+        <h3 class="subheader" md-subheader *ngIf="category">{{i | monthNames : order}}</h3>
         <md-list-item *ngFor="let cleanSweep of category" class="item-clean-sweep">
 
           <h2 md-list-icon class="list-icon">{{getDayFromDate(cleanSweep.date)}}<sup>{{getOrdinalFromDate(cleanSweep.date)}}</sup></h2>
@@ -24,6 +24,8 @@
         <md-divider *ngIf="category && i < cleanSweeps.length-1"></md-divider>
       </md-list>
     </div>
+
+    <button md-raised-button (click)="loadMore()">Load Older</button>
 
   </md-card-content>
 </md-card>

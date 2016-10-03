@@ -4,6 +4,9 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 // import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { Partner } from '../types/partner';
 import { UserData } from '../types/user-data';
+import {Subject} from 'rxjs/Subject';
+
+const PAGINATION_SIZE = 2;
 
 @Injectable()
 export class DataService {
@@ -12,10 +15,12 @@ export class DataService {
   partnerCategories: FirebaseListObservable<any[]>;
   user: FirebaseObjectObservable<any>;
 
+  cleanSweepPageNumber = new Subject();
+
   constructor(private af: AngularFire) {
     this.cleanSweeps = af.database.list('/cleanSweeps', {
       query: {
-        limitToLast: 10,
+        limitToLast: this.cleanSweepPageNumber,
         orderByChild: 'date',
       }
     });
@@ -30,6 +35,20 @@ export class DataService {
   }
   deleteCleanSweep(key: string) {
     this.cleanSweeps.remove(key);
+  }
+  loadNext10CleanSweeps(pageNumber: number) {
+    console.log(`Loading from# ${pageNumber * PAGINATION_SIZE}`);
+    this.cleanSweepPageNumber.next(pageNumber * PAGINATION_SIZE);
+
+    // this.cleanSweeps = this.af.database.list('/cleansweeps', {
+    //   query: {
+    //     startAt: pageNumber * PAGINATION_SIZE,
+    //     limitToLast: PAGINATION_SIZE,
+    //     orderByChild: 'date'
+    //   }
+    // });
+    // console.log('New List', this.cleanSweeps);
+
   }
   addPartner(pd: Partner) {
     pd.keys.push({

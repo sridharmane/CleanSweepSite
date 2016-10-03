@@ -1,4 +1,4 @@
-<md-toolbar class="toolbar-main" color="warn">
+<md-toolbar class="toolbar-main" color="primary">
   <!--<button md-icon-button color="secondary" (click)="toggleSidenav()">
         <md-icon class="md-48">menu_vert</md-icon>
     </button>-->
@@ -20,14 +20,14 @@
 <md-sidenav-layout class="sidenav-layout">
   <md-sidenav #start (open)="mybutton.focus()" class="sidenav-main" mode="side" [opened]="sidenavOpened">
 
-    <img class="logo-city" src="buffalo.png" />
-    <h3 class="title-city">Buffalo NY</h3>
+    <img class="logo-city" src="../assets/buffalo.png" />
+    <h3 class="title-city">Buffalo, NY</h3>
     <!--<md-toolbar>Menu</md-toolbar>-->
     <md-nav-list *ngIf="authService.isLoggedIn">
       <md-list-item *ngFor="let page of pages" [routerLink]="page.routerLink">
         <a md-line>{{ page.title }}</a>
         <!--<button md-icon-button>-->
-        <md-icon>info</md-icon>
+        <!--<md-icon>info</md-icon>-->
         <!--</button>-->
       </md-list-item>
     </md-nav-list>
