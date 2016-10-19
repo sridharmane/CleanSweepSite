@@ -3,8 +3,10 @@ import { HomeComponent } from './components/home';
 import { CleanSweepsComponent } from './components/clean-sweeps';
 import { PartnersComponent } from './components/partners';
 import { PartnerCategoriesComponent } from './components/partner-categories';
-import { AuthService } from './services/auth.service';
-import { UserData } from './types/user-data';
+import { AuthService } from './services';
+import { UserData, AUTH_STATES } from './types';
+import { FirebaseAuthState } from 'angularfire2';
+import { Router } from '@angular/router';
 import 'hammerjs';
 import * as firbase from 'firebase';
 
@@ -20,7 +22,8 @@ import * as firbase from 'firebase';
 export class AppComponent {
   title = 'Home';
   sidenavOpened: boolean = true;
-  streetAddresses: Array<any>;
+  isLoading: boolean = true;
+  authData: FirebaseAuthState = null;
   userData: UserData = null;
 
   pages = [
@@ -47,15 +50,38 @@ export class AppComponent {
   ];
 
   // cleanSweep: Array<CleanSweep>;
-  constructor(private authService: AuthService) {
-    this.authService.authEvents.subscribe((event) => {
-      console.log(event.type, event.userData);
-      this.userData = event.userData;
+  constructor(private authService: AuthService, private router: Router) {
+    this.authService.authEvents.subscribe(event => {
+      switch (event.state) {
+        case AUTH_STATES.LOGGED_IN:
+
+          if (event.authData) {
+            this.authData = event.authData;
+          }
+          if (event.userData) {
+            this.userData = event.userData;
+          }
+          console.log(event.state, event.authData, event.userData);
+          this.isLoading = false;
+          this.router.navigate([this.authService.redirectUrl]);
+          break;
+        case AUTH_STATES.LOGGED_OUT:
+          this.authData = null;
+          this.userData = null;
+          this.isLoading = false;
+          break;
+        case AUTH_STATES.CHECKING:
+          this.isLoading = true;
+          break;
+      }
+
     });
-    // this.currentUser = new User({});
   }
   toggleSidenav() {
     this.sidenavOpened = !this.sidenavOpened;
+  }
+  logout(){
+    this.authService.logout();
   }
 
 }

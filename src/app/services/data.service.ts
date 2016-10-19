@@ -28,7 +28,14 @@ export class DataService {
     this.partnerCategories = af.database.list('/partnerCategories');
   }
   createCleanSweep(cleanSweep: CleanSweep) {
-    this.cleanSweeps.push(cleanSweep);
+    return new Promise((resolve, reject) => {
+      this.cleanSweeps.push(cleanSweep).then(success => {
+        resolve(success);
+      }, error => {
+        reject(error);
+      });
+    });
+
   }
   updateCleanSweep(key: string, newSize: string) {
     this.cleanSweeps.update(key, { size: newSize });

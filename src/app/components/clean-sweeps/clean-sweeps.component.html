@@ -20,7 +20,7 @@
     <button md-menu-item> Help </button>
     <button md-menu-item disabled> Sign Out </button>
   </md-menu>
-  <button md-fab class="fab" (click)="showAddNew = true" color="primary">
+  <button md-fab class="fab" (click)="goto('add')" color="primary" *ngIf="showAddNew">
    <md-icon>add</md-icon>
 </button>
 <!--</div>-->

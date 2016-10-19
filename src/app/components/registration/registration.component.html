@@ -1,39 +1,35 @@
 <md-toolbar>
   <span class="fill-remaining-space">Register</span>
 </md-toolbar>
-<form #registrationForm="ngForm" [formGroup]="form" (ngSubmit)="submit(registrationForm.value)">
-  <md-card>
+<md-card>
+  <form #registrationForm="ngForm" [formGroup]="form" (ngSubmit)="submit(registrationForm.value)">
+    <md-card-subtitle>General</md-card-subtitle>
     <md-card-content>
-      <div class="form-row">
-        <md-input placeholder="Full Name" formControlName="name"></md-input>
-      </div>
-      <div class="form-row">
-        <md-input placeholder="Email" formControlName="email" [dividerColor]="email.valid?warn:primary"></md-input>
-        <!--<span>{{registrationForm.controls['email'].valid}}</span>-->
-        <!--<div *ngIf="!email.valid" class="ui error message">Invalid</div>-->
-        <!--<div *ngIf="email.valid" class="ui error message">Valid</div>-->
-      </div>
-      <div class="form-row">
+      <md-input placeholder="Full Name" formControlName="name"></md-input>
+    </md-card-content>
+    <md-card-subtitle>Account Information</md-card-subtitle>
+    <md-card-content>
+      <section formGroupName="account">
+        <md-input placeholder="Email" formControlName="email"></md-input><br />
         <md-input type="password" placeholder="Password" formControlName="password"></md-input>
         <md-input type="password" placeholder="Confirm Password" formControlName="passwordConfirm"></md-input>
-      </div>
-      <div class="form-row">
-        <!--<md-input type="select" placeholder="Type" ></md-input>-->
-        <md-radio-group formControlName="type">
-          <md-radio-button value="admin">Admin</md-radio-button>
-          <md-radio-button value="manager">Manager</md-radio-button>
-        </md-radio-group>
-      </div>
-      <!--<div class="form-row">-->
-      <span class="error" *ngIf="errorMessage">{{errorMessage}}</span>
-      <!--</div>-->
-      
+      </section>
     </md-card-content>
+    <md-card-subtitle>Account Type</md-card-subtitle>
+    <md-card-content>
+      <md-radio-group formControlName="type">
+        <md-radio-button value="admin">Admin</md-radio-button>
+        <md-radio-button value="manager">Manager</md-radio-button>
+      </md-radio-group>
+    </md-card-content>
+
+    <span class="error" *ngIf="errorMessage">{{errorMessage}}</span>
     <md-card-actions>
-      <button md-button color="primary" type="submit" [disabled]="!registrationForm.valid">REGISTER USER</button>
+      <button md-button color="primary" type="submit" [disabled]="!registrationForm.valid">REGISTER</button>
       <button md-button color="warn" type="reset" (click)="cancel()">CANCEL</button>
     </md-card-actions>
-  </md-card>
-  <app-overlay-spinner *ngIf="inProgress"></app-overlay-spinner>
-</form>
+  </form>
+</md-card>
+<app-overlay-spinner *ngIf="inProgress"></app-overlay-spinner>
+
 <div>{{registrationForm.value | json }}</div>

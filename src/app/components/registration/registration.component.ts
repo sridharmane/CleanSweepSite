@@ -3,6 +3,15 @@ import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from
 import { AuthService } from '../../services/auth.service';
 import { CustomFormValidators } from '../../validators/custom-form-validators';
 
+let EMAIL_REGEXP = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+function passwordMatcher(c: AbstractControl) {
+  return c.get('password').value === c.get('passwordConfirm').value
+    ? null : { 'nomatch': true };
+}
+function emailValidator(c: AbstractControl) {
+  return EMAIL_REGEXP.test(c.get('email').value) ? null : { 'emailInvalid': true };
+}
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -12,16 +21,19 @@ export class RegistrationComponent implements OnInit {
   form: FormGroup;
   email: AbstractControl;
   inProgress: boolean = false;
-  errorMessage:string = '';
+  errorMessage: string = '';
   statusMessage: string = '';
 
   constructor(private fb: FormBuilder, private as: AuthService) {
     this.form = this.fb.group({
       name: ['First LastLast', [Validators.minLength(3), Validators.required]],
-      email: ['first.last@firstlast.com', [Validators.required]],
-      // email: ['', [Validators.required, CustomFormValidators.email]],
-      password: ['firstlast', [Validators.minLength(3), Validators.required]],
-      passwordConfirm: ['firstlast', [Validators.minLength(3), Validators.required]],
+      account: this.fb.group({
+        email: ['first.last@firstlast.com', [Validators.required]],
+        password: ['', [Validators.minLength(3), Validators.required]],
+        passwordConfirm: ['', [Validators.minLength(3), Validators.required]],
+      }, {
+          validator: passwordMatcher
+        }),
       type: ['admin', [Validators.minLength(3), Validators.required]]
     });
 
@@ -46,15 +58,15 @@ export class RegistrationComponent implements OnInit {
       password: formData.password,
       name: formData.name,
       type: formData.type
-    }).subscribe(success=>{
+    }).subscribe(success => {
       this.inProgress = false;
       this.statusMessage = success.message;
-      console.log('Got in RegistrationComponent ',success);
+      console.log('Got in RegistrationComponent ', success);
     },
-    error=>{
-      this.errorMessage = error;
-      console.log('Got in RegistrationComponent ',error);
-    });
+      error => {
+        this.errorMessage = error;
+        console.log('Got in RegistrationComponent ', error);
+      });
   }
 
   cancel() {

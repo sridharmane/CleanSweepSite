@@ -19,7 +19,7 @@ export const cleanSweepsRoutes: Routes = [
         children: [
             { path: 'list', component: ListCleanSweepsComponent },
             { path: 'add', component: AddCleanSweepComponent },
-            { path: ':id', component: DetailCleanSweepComponent },
+            { path: ':id/detail', component: DetailCleanSweepComponent },
             { path: ':id/edit', component: EditCleanSweepComponent }
         ]
     },

@@ -9,23 +9,8 @@ import { AngularFireModule, AuthMethods, AuthProviders, firebaseAuthConfig, Fire
 /**
  * angular2-material 
  * */
-import {MdCoreModule, OVERLAY_PROVIDERS} from '@angular2-material/core';
-import {MdButtonModule} from '@angular2-material/button';
-import {MdCardModule} from '@angular2-material/card';
-import {MdCheckboxModule} from '@angular2-material/checkbox';
-import {MdGridListModule} from '@angular2-material/grid-list';
-import {MdIconModule, MdIconRegistry} from '@angular2-material/icon';
-import {MdInputModule} from '@angular2-material/input';
-import {MdListModule} from '@angular2-material/list';
-import {MdMenuModule} from '@angular2-material/menu';
-import {MdProgressCircleModule} from '@angular2-material/progress-circle';
-import {MdRadioModule, MdUniqueSelectionDispatcher} from '@angular2-material/radio';
-import {MdSidenavModule} from '@angular2-material/sidenav';
-// import {MdSlideToggleModule} from '@angular2-material/slide-toggle';
-// import {MdSliderModule} from '@angular2-material/slider';
-import {MdTabsModule} from '@angular2-material/tabs';
-import {MdToolbarModule} from '@angular2-material/toolbar';
-import {MdTooltipModule} from '@angular2-material/tooltip';
+import {MaterialModule, OVERLAY_PROVIDERS} from '@angular/material';
+
 
 /**
  * Routes 
@@ -71,14 +56,8 @@ import { PipesModule } from './pipes/pipes.module';
  * */
 
 
-/**
- * Modules
- */
-// import { CleanSweepsModule } from './components/clean-sweeps';
-
-
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-
+// import { Ng2MaterialModule } from 'ng2-material';
 
 const firebaseAppConfig = {
   apiKey: 'AIzaSyA-xHEbkhLk9ZLmycfIPEJhArQskJKrxvA',
@@ -111,26 +90,9 @@ const myFirebaseAuthConfig = {
   imports: [
     appRouting,
     BrowserModule,
-    // CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    // CleanSweepsModule,
-
-    MdCoreModule.forRoot(),
-    MdButtonModule.forRoot(),
-    MdCardModule.forRoot(),
-    MdCheckboxModule.forRoot(),
-    MdGridListModule.forRoot(),
-    MdIconModule.forRoot(),
-    MdInputModule.forRoot(),
-    MdListModule.forRoot(),
-    MdMenuModule.forRoot(),
-    MdProgressCircleModule.forRoot(),
-    MdRadioModule.forRoot(),
-    MdSidenavModule.forRoot(),
-    MdTabsModule.forRoot(),
-    MdToolbarModule.forRoot(),
-    MdTooltipModule.forRoot(),
+    MaterialModule.forRoot(),
     AngularFireModule.initializeApp(firebaseAppConfig, myFirebaseAuthConfig),
     // Pipes
     PipesModule
@@ -142,9 +104,8 @@ const myFirebaseAuthConfig = {
     GeocodingService,
     DataService,
     DateTimeService,
-    MdIconRegistry,
     OVERLAY_PROVIDERS,
-    MdUniqueSelectionDispatcher,
+    // MdUniqueSelectionDispatcher,
     CookieService
   ],
   entryComponents: [AppComponent],

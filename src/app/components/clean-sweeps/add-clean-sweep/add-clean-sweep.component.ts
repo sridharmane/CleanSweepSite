@@ -1,13 +1,14 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { DataService } from '../../../services/data.service';
 import { DateTimeService } from '../../../services/date-time.service';
 
-import {CleanSweep}  from '../../../types/clean-sweep';
+import { CleanSweep }  from '../../../types/clean-sweep';
 import { CleanSweepEventData } from '../../../types/clean-sweep-event-data';
 // import {Street}  from '../../types/street';
-
-
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
+import { MESSAGES } from '../../../shared';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-add-clean-sweep',
   templateUrl: './add-clean-sweep.component.html',
@@ -25,7 +26,15 @@ export class AddCleanSweepComponent implements OnInit {
   endTime: string = '04:00 pm';
   streets: FormArray;
 
-  constructor(private ds: DataService, private dts: DateTimeService, private _fb: FormBuilder) {
+  constructor(
+    private ds: DataService,
+    private dts: DateTimeService,
+    private _fb: FormBuilder,
+    private snackBar: MdSnackBar,
+    private vcr: ViewContainerRef,
+    private router: Router,
+    private currentRoute: ActivatedRoute
+  ) {
 
     this.addCleanSweepForm = this._fb.group({
       date: this.dts.date,
@@ -40,26 +49,34 @@ export class AddCleanSweepComponent implements OnInit {
       })
       // .filter((value) => this.addCleanSweepForm.valid)
       .subscribe(validValue => {
-        console.log(validValue);
+        // console.log(validValue);
       });
     this.getCleanSweep();
   }
   ngOnInit() {
   }
-  getLastCleanSweepNumber() {
-    // this.ds.getCleanSweep({});
+
+  showSnackBar(message: string) {
+    let config = new MdSnackBarConfig(this.vcr);
+    this.snackBar.open(message, 'OK', config);
   }
 
   submit(formData) {
     console.log('Submiting Form with data:', formData);
     let cs = new CleanSweep(formData);
-    console.log(cs);
-    this.ds.createCleanSweep(cs);
-    this.cleanSweepEvents.emit({ component: 'addCleanSweepComponent', visible: false });
+
+    this.ds.createCleanSweep(cs).then(success => {
+      console.log('Add CleanSweep Success ', success);
+      this.showSnackBar(MESSAGES.CLEANSWEEP_CREATED);
+      this.goto('detail',success);
+    }, error => {
+      console.log('Add CleanSweep Error ', error);
+      this.showSnackBar(MESSAGES.CLEANSWEEP_CREATE_ERROR);
+    });
+
   }
 
   cancel() {
-    this.cleanSweepEvents.emit({ component: 'addCleanSweepComponent', visible: false });
   }
 
   buildStreet() {
@@ -85,11 +102,10 @@ export class AddCleanSweepComponent implements OnInit {
     this.streets.removeAt(index);
   }
 
-  onSubmit() {
-    // this.form.
-  }
   getCleanSweep() {
     this.ds.getCleanSweep();
   }
-
+  goto(childRoute: string,success:any) {
+    this.router.navigate([success.key,childRoute], { relativeTo: this.currentRoute.parent });
+  }
 }

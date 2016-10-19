@@ -1,8 +1,11 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { AngularFire, AngularFireAuth } from 'angularfire2';
-import { User } from '../types/user';
-import { UserData } from '../types/user-data';
-import { AuthEventData } from '../types/auth-event-data';
+import { AngularFire, AngularFireAuth, FirebaseAuthState } from 'angularfire2';
+import {
+  User,
+  UserData,
+  AuthEventData,
+  AUTH_STATES,
+} from '../types/';
 import { DataService } from './data.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
@@ -13,18 +16,47 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 @Injectable()
 export class AuthService {
   isLoggedIn: boolean = false;
+  
+  
+  
+  authData: FirebaseAuthState = null;
   userData: UserData = null;
   // store the URL so we can redirect after logging in
-  redirectUrl: string;
-  authEvents: EventEmitter<AuthEventData> = new EventEmitter();
+  _redirectUrl: string;
+  get redirectUrl() : string {
+    if(!this._redirectUrl){
+      return '/home';
+    }
+    return this._redirectUrl;
+  }
+  
+  set redirectUrl(v : string) {
+    this._redirectUrl = v;
+  }
+  
+  authEvents: EventEmitter<AuthEventData> = new EventEmitter<AuthEventData>();
 
   constructor(private af: AngularFire, private ds: DataService, private router: Router, private cs: CookieService) {
-    if (this.getAuthCookie()) {
-      console.log(this.getAuthCookie());
-      this.isLoggedIn = true;
-    }else {
-      console.log('No Auth Cookie Found');
-    }
+    this.af.auth.subscribe(auth => {
+      console.log('Got Auth from firebase', auth);
+      if (auth) {
+        this.authData = auth;
+        this.isLoggedIn = true;
+        this.authEvents.emit({
+          state: AUTH_STATES.LOGGED_IN,
+          authData: auth
+        });
+      } else {
+        this.isLoggedIn = false;
+        this.router.navigate(['./login']);
+      }
+    });
+    // if (this.getAuthCookie()) {
+    //   // console.log(this.getAuthCookie());
+    //   this.isLoggedIn = true;
+    // } else {
+    //   console.log('No Auth Cookie Found');
+    // }
 
   }
 
@@ -34,23 +66,22 @@ export class AuthService {
         email: email,
         password: password
       }
-      this.af.auth.login(credentials).then(authData => {
-        console.log('Login Success: ', authData);
+      this.af.auth.login(credentials).then(auth => {
+        console.log('Login Success: ', auth);
         // Set the Cookie
-        this.setAuthCookie(authData);
+        // this.setAuthCookie(auth);
 
         this.isLoggedIn = true;
-        resolve(authData);
+        resolve(auth);
         if (this.redirectUrl) {
           this.router.navigate([this.redirectUrl]);
         } else {
           this.router.navigate(['/home']);
         }
         this.authEvents.emit({
-          type: 'login',
-          userData: this.userData
+          state: AUTH_STATES.LOGGED_IN,
+          authData: auth
         });
-        // return this.isLoggedIn;
 
       }).catch(error => {
         console.log('Login Error', error);
@@ -99,9 +130,11 @@ export class AuthService {
           });
 
           this.userData = firebaseUserObj;
+
           this.authEvents.emit({
-            type: 'register',
-            userData: this.userData
+            state: AUTH_STATES.LOGGED_IN,
+            authData: authData,
+            userData: userData
           });
 
 

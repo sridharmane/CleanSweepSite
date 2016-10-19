@@ -1,6 +1,7 @@
 // import { Component, OnInit, trigger} from '@angular/core';
 import { Component, OnInit, trigger, state, transition, style, group, animate } from '@angular/core';
 import { CleanSweepEventData } from '../../types/clean-sweep-event-data';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-clean-sweeps',
@@ -24,9 +25,23 @@ export class CleanSweepsComponent implements OnInit {
   showAddNew = false;
   showEdit = false;
 
-  constructor() { }
+  constructor(private router: Router, private currentRoute: ActivatedRoute) {
+    router.events.subscribe(event => {
+      console.log(event);
+      this.initShowAddNew(event.url);
+    });
+
+  }
 
   ngOnInit() {
+    this.initShowAddNew(this.router.url);
+  }
+  initShowAddNew(url: string) {
+    if (url === '/cleansweeps/list') {
+      this.showAddNew = true;
+    } else {
+      this.showAddNew = false;
+    }
   }
   eventsReceived(eventData: CleanSweepEventData) {
     switch (eventData.component) {
@@ -38,6 +53,10 @@ export class CleanSweepsComponent implements OnInit {
         break;
     }
 
+  }
+  goto(childRoute: string) {
+    this.showAddNew = false;
+    this.router.navigate(['add'], { relativeTo: this.currentRoute });
   }
 
 }

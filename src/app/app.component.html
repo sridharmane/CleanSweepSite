@@ -13,8 +13,11 @@
       <img class="avatar" src="http://lorempixel.com/100/100" />
     </span>
   </button>
-  <button md-button *ngIf="!userData" [routerLink]="['/login']">
+  <button md-button *ngIf="!authData" [routerLink]="['/login']">
     Log In
+  </button>
+  <button md-button *ngIf="authData" (click)="logout()">
+    Log Out
   </button>
 </md-toolbar>
 <md-sidenav-layout class="sidenav-layout">
