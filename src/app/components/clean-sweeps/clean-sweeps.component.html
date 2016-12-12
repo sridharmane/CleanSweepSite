@@ -1,26 +1,27 @@
-<!--<md-toolbar color="primary">
+<md-toolbar color="primary">
   <span class="fill-remaining-space">Clean Sweeps</span>
   <button md-icon-button [md-menu-trigger-for]="menu">
    <md-icon>more_vert</md-icon>
    </button>
-  
-</md-toolbar>-->
-
-
-<!--<div class="test">-->
-  <div class="content">
-    <!--<app-add-clean-sweep class="component" *ngIf="showAddNew" (cleanSweepEvents)="eventsReceived($event)" [@showHideTrigger]="showAddNew"></app-add-clean-sweep>
-    <app-edit-clean-sweep class="component" *ngIf="showEdit" (cleanSweepEvents)="eventsReceived($event)" [@showHideTrigger]="showEdit"></app-edit-clean-sweep>-->
-    <!--<app-list-clean-sweeps class="component" (cleanSweepEvents)="eventsReceived($event)"></app-list-clean-sweeps>-->
-    <router-outlet></router-outlet>
-  </div>
-  <md-menu #menu="mdMenu" x-position="before">
-    <button md-menu-item> Refresh </button>
-    <button md-menu-item> Settings </button>
-    <button md-menu-item> Help </button>
-    <button md-menu-item disabled> Sign Out </button>
-  </md-menu>
-  <button md-fab class="fab" (click)="goto('add')" color="primary" *ngIf="showAddNew">
+</md-toolbar>
+<md-tab-group>
+  <md-tab label="DASHBOARD">
+    <div class="test">
+      <app-dashboard></app-dashboard>
+    </div>
+  </md-tab>
+  <md-tab label="LIST">
+    <app-list-clean-sweeps (cleanSweepEvents)="eventsReceived($event)"></app-list-clean-sweeps>
+  </md-tab>
+  <md-tab label="STATS">
+  </md-tab>
+</md-tab-group>
+<md-menu #menu="mdMenu" x-position="before">
+  <button md-menu-item> Refresh </button>
+  <button md-menu-item> Settings </button>
+  <button md-menu-item> Help </button>
+  <button md-menu-item disabled> Sign Out </button>
+</md-menu>
+<button md-fab class="fab" (click)="goto('add')" color="secondary" *ngIf="true">
    <md-icon>add</md-icon>
 </button>
-<!--</div>-->

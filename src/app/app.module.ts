@@ -5,33 +5,26 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /**
  * angularfire2 
  * */
-import { AngularFireModule, AuthMethods, AuthProviders, firebaseAuthConfig, FirebaseAuthConfig } from 'angularfire2';
+import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 /**
  * angular2-material 
  * */
-import {MaterialModule, OVERLAY_PROVIDERS} from '@angular/material';
+import { MaterialModule, OVERLAY_PROVIDERS } from '@angular/material';
 
 
 /**
  * Routes 
  * */
-import { appRouting, appRoutingProviders } from './app.routes';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './app.routes';
 
 /**
  * Components 
  * */
 import { AppComponent } from './app.component';
-// import { CleanSweepsComponent }  from './components/clean-sweeps';
 
-import {
-  CleanSweepsComponent,
-  AddCleanSweepComponent,
-  EditCleanSweepComponent,
-  ListCleanSweepsComponent,
-  DetailCleanSweepComponent
-} from './components/clean-sweeps/';
-import { PartnersComponent } from './components/partners';
-import { PartnerCategoriesComponent } from './components/partner-categories';
+import { CleanSweepsModule } from './components/clean-sweeps';
+import { ConfigModule } from './components/config';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginComponent } from './components/login';
@@ -41,11 +34,11 @@ import { OverlaySpinnerComponent } from './components/overlay-spinner';
 /**
  * Services 
  * */
-import {AuthGuardService} from './services/auth-guard.service';
-import {AuthService} from './services/auth.service';
-import {GeocodingService} from './services/geocoding.service';
-import {DataService} from './services/data.service';
-import {DateTimeService} from './services/date-time.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthService } from './services/auth.service';
+import { GeocodingService } from './services/geocoding.service';
+import { DataService } from './services/data.service';
+import { DateTimeService } from './services/date-time.service';
 
 /**
  * Pipes 
@@ -57,7 +50,7 @@ import { PipesModule } from './pipes/pipes.module';
 
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-// import { Ng2MaterialModule } from 'ng2-material';
+// import { Ng2MaterialModule, MdBackdropModule, Ng2MaterialNodeModule } from 'ng2-material';
 
 const firebaseAppConfig = {
   apiKey: 'AIzaSyA-xHEbkhLk9ZLmycfIPEJhArQskJKrxvA',
@@ -74,38 +67,31 @@ const myFirebaseAuthConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    PartnersComponent,
-    PartnerCategoriesComponent,
     HomeComponent,
     PageNotFoundComponent,
     LoginComponent,
     RegistrationComponent,
-    OverlaySpinnerComponent,
-    CleanSweepsComponent,
-    AddCleanSweepComponent,
-    EditCleanSweepComponent,
-    ListCleanSweepsComponent,
-    DetailCleanSweepComponent
+    OverlaySpinnerComponent
   ],
   imports: [
-    appRouting,
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule.forRoot(),
     AngularFireModule.initializeApp(firebaseAppConfig, myFirebaseAuthConfig),
+    CleanSweepsModule,
+    ConfigModule,
     // Pipes
-    PipesModule
+    PipesModule,
   ],
   providers: [
-    appRoutingProviders,
     AuthGuardService,
     AuthService,
     GeocodingService,
     DataService,
     DateTimeService,
     OVERLAY_PROVIDERS,
-    // MdUniqueSelectionDispatcher,
     CookieService
   ],
   entryComponents: [AppComponent],

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { DataService } from '../../../services/data.service';
 import { DateTimeService } from '../../../services/date-time.service';
 
-import { CleanSweep }  from '../../../types/clean-sweep';
+import { CleanSweep } from '../../../types/clean-sweep';
 import { CleanSweepEventData } from '../../../types/clean-sweep-event-data';
 // import {Street}  from '../../types/street';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-add-clean-sweep',
   templateUrl: './add-clean-sweep.component.html',
-  styleUrls: ['add-clean-sweep.component.scss'],
+  styleUrls: ['./add-clean-sweep.component.scss'],
   providers: [DateTimeService],
   // directives: [FormGroup, FormControlName]
 })
@@ -29,14 +29,14 @@ export class AddCleanSweepComponent implements OnInit {
   constructor(
     private ds: DataService,
     private dts: DateTimeService,
-    private _fb: FormBuilder,
+    private fb: FormBuilder,
     private snackBar: MdSnackBar,
     private vcr: ViewContainerRef,
     private router: Router,
     private currentRoute: ActivatedRoute
   ) {
 
-    this.addCleanSweepForm = this._fb.group({
+    this.addCleanSweepForm = this.fb.group({
       date: this.dts.date,
       startTime: this.startTime,
       endTime: this.endTime,
@@ -57,7 +57,7 @@ export class AddCleanSweepComponent implements OnInit {
   }
 
   showSnackBar(message: string) {
-    let config = new MdSnackBarConfig(this.vcr);
+    let config = new MdSnackBarConfig();
     this.snackBar.open(message, 'OK', config);
   }
 
@@ -68,7 +68,7 @@ export class AddCleanSweepComponent implements OnInit {
     this.ds.createCleanSweep(cs).then(success => {
       console.log('Add CleanSweep Success ', success);
       this.showSnackBar(MESSAGES.CLEANSWEEP_CREATED);
-      this.goto('detail',success);
+      this.goto('detail', success);
     }, error => {
       console.log('Add CleanSweep Error ', error);
       this.showSnackBar(MESSAGES.CLEANSWEEP_CREATE_ERROR);
@@ -80,7 +80,7 @@ export class AddCleanSweepComponent implements OnInit {
   }
 
   buildStreet() {
-    return this._fb.group({
+    return this.fb.group({
       name: ['Elm', [Validators.required, Validators.minLength(3)]],
       startHouseNumber: ['1', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]],
       endHouseNumber: ['100', [Validators.required, Validators.minLength(1), Validators.maxLength(4)]]
@@ -88,7 +88,7 @@ export class AddCleanSweepComponent implements OnInit {
   }
 
   buildStreetsArray(): FormArray {
-    this.streets = this._fb.array([
+    this.streets = this.fb.array([
       this.buildStreet()
     ]);
     return this.streets;
@@ -105,7 +105,7 @@ export class AddCleanSweepComponent implements OnInit {
   getCleanSweep() {
     this.ds.getCleanSweep();
   }
-  goto(childRoute: string,success:any) {
-    this.router.navigate([success.key,childRoute], { relativeTo: this.currentRoute.parent });
+  goto(childRoute: string, success: any) {
+    this.router.navigate([success.key, childRoute], { relativeTo: this.currentRoute.parent });
   }
 }

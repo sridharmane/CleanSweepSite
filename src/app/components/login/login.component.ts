@@ -16,10 +16,10 @@ export class LoginComponent implements OnInit {
     });
 
     this.form.valueChanges
-      // .filter((value) => this.addCleanSweepForm.valid)
-      .subscribe(validValue => {
-        console.log(validValue);
-      });
+    // .filter((value) => this.addCleanSweepForm.valid)
+    // .subscribe(validValue => {
+    //   console.log(validValue);
+    // });
   }
 
   ngOnInit() {

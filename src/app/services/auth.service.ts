@@ -16,24 +16,24 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 @Injectable()
 export class AuthService {
   isLoggedIn: boolean = false;
-  
-  
-  
+
+
+
   authData: FirebaseAuthState = null;
   userData: UserData = null;
   // store the URL so we can redirect after logging in
   _redirectUrl: string;
-  get redirectUrl() : string {
-    if(!this._redirectUrl){
+  get redirectUrl(): string {
+    if (!this._redirectUrl) {
       return '/home';
     }
     return this._redirectUrl;
   }
-  
-  set redirectUrl(v : string) {
+
+  set redirectUrl(v: string) {
     this._redirectUrl = v;
   }
-  
+
   authEvents: EventEmitter<AuthEventData> = new EventEmitter<AuthEventData>();
 
   constructor(private af: AngularFire, private ds: DataService, private router: Router, private cs: CookieService) {
@@ -78,10 +78,19 @@ export class AuthService {
         } else {
           this.router.navigate(['/home']);
         }
-        this.authEvents.emit({
-          state: AUTH_STATES.LOGGED_IN,
-          authData: auth
+        this.ds.getUserDetails(auth.uid).subscribe(userData => {
+
+          console.log('User Data from firebase', userData);
+          this.authEvents.emit({
+            state: AUTH_STATES.LOGGED_IN,
+            authData: auth,
+            userData: userData
+          });
         });
+
+
+
+
 
       }).catch(error => {
         console.log('Login Error', error);
@@ -106,6 +115,7 @@ export class AuthService {
       observer.next({
         message: 'Creating Account'
       });
+      console.log('Createing account with userData', userData);
       this.af.auth.createUser({
         email: userData.email,
         password: userData.password

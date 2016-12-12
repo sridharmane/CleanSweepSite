@@ -21,17 +21,21 @@
   </button>
 </md-toolbar>
 <md-sidenav-layout class="sidenav-layout">
-  <md-sidenav #start (open)="mybutton.focus()" class="sidenav-main" mode="side" [opened]="sidenavOpened">
+  <md-sidenav #start (open)="mybutton.focus()" class="sidenav-main" [ngClass]="{'sidenav-closed':sidenavStatus==='closed','sidenav-opened':sidenavStatus==='opened'}"
+    mode="side" [opened]="sidenavOpened">
+    <md-toolbar color="primary">
+      <!--<span>Menu</span>-->
+      <span class="fill-remaining-space"></span>
+      <button md-icon-button (click)="toggleSidenavStatus()"><md-icon>menu</md-icon></button>
+    </md-toolbar>
+    <img class="logo-city" src="../assets/buffalo.png" *ngIf="sidenavStatus==='opened'" />
+    <h3 class="title-city" *ngIf="sidenavStatus==='opened'">Buffalo, NY</h3>
 
-    <img class="logo-city" src="../assets/buffalo.png" />
-    <h3 class="title-city">Buffalo, NY</h3>
-    <!--<md-toolbar>Menu</md-toolbar>-->
     <md-nav-list *ngIf="authService.isLoggedIn">
       <md-list-item *ngFor="let page of pages" [routerLink]="page.routerLink">
-        <a md-line>{{ page.title }}</a>
-        <!--<button md-icon-button>-->
-        <!--<md-icon>info</md-icon>-->
-        <!--</button>-->
+        <md-icon>{{ page.icon }}</md-icon>
+        <a md-line *ngIf="sidenavStatus==='opened'">{{ page.title }}</a>
+
       </md-list-item>
     </md-nav-list>
     <md-nav-list *ngIf="!authService.isLoggedIn">

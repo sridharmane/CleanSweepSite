@@ -31,18 +31,17 @@ export class RegistrationComponent implements OnInit {
         email: ['first.last@firstlast.com', [Validators.required]],
         password: ['', [Validators.minLength(3), Validators.required]],
         passwordConfirm: ['', [Validators.minLength(3), Validators.required]],
+        type: ['admin', [Validators.minLength(3), Validators.required]]
       }, {
           validator: passwordMatcher
         }),
-      type: ['admin', [Validators.minLength(3), Validators.required]]
     });
 
-    this.form.valueChanges
-      // .filter((value) => this.addCleanSweepForm.valid)
-      .subscribe(validValue => {
-        // console.log(validValue);
-      });
-    this.email = this.form.controls['email'];
+    // this.form.valueChanges
+    // .filter((value) => this.addCleanSweepForm.valid)
+    // .subscribe(validValue => {
+    // console.log(validValue);
+    // });
   }
 
   ngOnInit() {
@@ -54,10 +53,10 @@ export class RegistrationComponent implements OnInit {
     this.errorMessage = '';
     this.as.register({
       uid: null,
-      email: formData.email,
-      password: formData.password,
       name: formData.name,
-      type: formData.type
+      email: formData.account.email,
+      password: formData.account.password,
+      type: formData.account.type
     }).subscribe(success => {
       this.inProgress = false;
       this.statusMessage = success.message;

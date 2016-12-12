@@ -11,7 +11,7 @@ import { CleanSweep }  from '../../../types/clean-sweep';
 @Component({
   selector: 'app-edit-clean-sweep',
   templateUrl: './edit-clean-sweep.component.html',
-  styleUrls: ['edit-clean-sweep.component.scss'],
+  styleUrls: ['./edit-clean-sweep.component.scss'],
   providers: [DateTimeService],
   // directives: [FormGroup, FormControlName]
 })

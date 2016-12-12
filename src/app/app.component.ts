@@ -1,11 +1,10 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { HomeComponent } from './components/home';
 import { CleanSweepsComponent } from './components/clean-sweeps';
-import { PartnersComponent } from './components/partners';
-import { PartnerCategoriesComponent } from './components/partner-categories';
+import { ConfigComponent } from './components/config';
 import { AuthService } from './services';
 import { UserData, AUTH_STATES } from './types';
-import { FirebaseAuthState } from 'angularfire2';
+
 import { Router } from '@angular/router';
 import 'hammerjs';
 import * as firbase from 'firebase';
@@ -13,9 +12,7 @@ import * as firbase from 'firebase';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: [
-    './app.component.scss'
-  ]
+  styleUrls: ['./app.component.scss']
 })
 
 
@@ -23,29 +20,34 @@ export class AppComponent {
   title = 'Home';
   sidenavOpened: boolean = true;
   isLoading: boolean = true;
-  authData: FirebaseAuthState = null;
+  authData: any = null;
   userData: UserData = null;
+  sidenavStatus: 'closed' | 'opened' = 'opened';
 
   pages = [
     {
       title: 'Home',
       component: HomeComponent,
-      routerLink: 'home'
+      routerLink: 'home',
+      icon: 'home'
     },
     {
       title: 'Clean Sweeps',
       component: CleanSweepsComponent,
-      routerLink: 'cleansweeps'
+      routerLink: 'cleansweeps',
+      icon: 'access_time'
     },
     {
-      title: 'Partners',
-      component: PartnersComponent,
-      routerLink: 'partners'
+      title: 'Config',
+      component: ConfigComponent,
+      routerLink: 'config',
+      icon: 'settings_applications'
     },
     {
-      title: 'Partner Categories',
-      component: PartnerCategoriesComponent,
-      routerLink: 'partner-categories'
+      title: 'Users',
+      component: ConfigComponent,
+      routerLink: 'config',
+      icon: 'people'
     }
   ];
 
@@ -80,8 +82,15 @@ export class AppComponent {
   toggleSidenav() {
     this.sidenavOpened = !this.sidenavOpened;
   }
-  logout(){
+  logout() {
     this.authService.logout();
+  }
+  toggleSidenavStatus() {
+    if (this.sidenavStatus === 'closed') {
+      this.sidenavStatus = 'opened';
+    } else if (this.sidenavStatus === 'opened') {
+      this.sidenavStatus = 'closed';
+    }
   }
 
 }

@@ -11,10 +11,6 @@ body {
   }
 
   
-
-  .demo-content {
-    padding: 32px;
-  }
 md-card{
   font-family: $fontFamily;
   padding: 0;
@@ -41,10 +37,12 @@ md-card{
     font-size: 20px;
   }
 }
-
-.demo-secondary-text {
-  color: rgba(0, 0, 0, 0.54);
+.fill-remaining-space {
+  // This fills the remaining space, by using flexbox. 
+  // Every toolbar row uses a flexbox row layout.
+  flex: 1 1 auto;
 }
+
 .logo-main{
   font-size: 48px;
     line-height: 24px;
@@ -55,8 +53,9 @@ md-card{
   cursor: pointer;
   margin-left: 5px;
 }
-.sidenav-main {
 
+
+.sidenav-main {  
   .logo-city{
       width: 120px;
       margin: 0 auto;
@@ -73,7 +72,7 @@ md-card{
       margin-top: 0px;
       font-family: $fontFamily;
     }
-    min-width: 25%;
+    
 
     [md-button] {
       width: 100%;
@@ -93,7 +92,7 @@ md-card{
     border-radius: 2px;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     // background: white;
-    color: black;
+    // color: black;
     display: flex;
     border-radius: 0px;
     z-index: 10;
@@ -121,17 +120,22 @@ md-card{
       }
     }
 }
-.sidenav-layout{
-  top: 64px;
+// .sidenav-layout{
+//   padding-top: 64px;
+// }
+md-sidenav-layout, md-sidenav{
+  padding-top: 64px;
+
+
 }
 
 ///MINE
-.main-fab-button{
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    margin: 16px;
-}
+// .main-fab-button{
+//     position: fixed;
+//     right: 0;
+//     bottom: 0;
+//     margin: 16px;
+// }
 .full-width{
   flex: 1 1 auto
 }

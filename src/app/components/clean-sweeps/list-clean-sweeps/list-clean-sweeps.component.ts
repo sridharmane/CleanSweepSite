@@ -9,8 +9,8 @@ const ORDER_DESCENDING = 'descending';
 
 @Component({
   selector: 'app-list-clean-sweeps',
-  templateUrl: 'list-clean-sweeps.component.html',
-  styleUrls: ['list-clean-sweeps.component.scss'],
+  templateUrl: './list-clean-sweeps.component.html',
+  styleUrls: ['./list-clean-sweeps.component.scss'],
 })
 export class ListCleanSweepsComponent implements OnInit {
   // @ViewChildren(MdMenuTrigger) triggers: QueryList<MdMenuTrigger>;

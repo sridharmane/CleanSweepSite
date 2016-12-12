@@ -5,7 +5,7 @@
         <md-icon class="md-48">sort</md-icon>
     </button>
   </md-toolbar>
-  <md-card-content *ngIf="cleanSweeps">
+  <md-card-content>
     <div *ngFor="let category of cleanSweeps | async | categorizeByDate : 'month' : order; let i = index;">
       <md-list *ngIf="category">
         <h3 class="subheader" md-subheader *ngIf="category">{{i | monthNames : order}}</h3>

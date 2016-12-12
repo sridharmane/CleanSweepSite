@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { DataService } from '../../../services/data.service';
 import { DateTimeService } from '../../../services/date-time.service';
 
-import {CleanSweep}  from '../../../types/clean-sweep';
+import { CleanSweep } from '../../../types/clean-sweep';
 import { CleanSweepEventData } from '../../../types/clean-sweep-event-data';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-detail-clean-sweep',
   templateUrl: './detail-clean-sweep.component.html',
-  styleUrls: ['detail-clean-sweep.component.scss'],
+  styleUrls: ['./detail-clean-sweep.component.scss'],
   providers: [DateTimeService],
   // directives: [FormGroup, FormControlName]
 })
@@ -25,24 +25,24 @@ export class DetailCleanSweepComponent implements OnInit {
   endTime: string = '04:00 pm';
   streets: FormArray;
 
-  constructor(private ds: DataService, private dts: DateTimeService,   private router: Router,
+  constructor(private ds: DataService, private dts: DateTimeService, private router: Router,
     private currentRoute: ActivatedRoute) {
-    
-    
-    this.currentRoute.params.subscribe(routeParams=>{
-      console.log('Route Params',routeParams);
+
+
+    this.currentRoute.params.subscribe(routeParams => {
+      console.log('Route Params', routeParams);
       this.getCleanSweep(routeParams['id']);
     });
-    
+
   }
   ngOnInit() {
   }
   getLastCleanSweepNumber() {
     // this.ds.getCleanSweep({});
   }
-  getCleanSweep(key:string) {
-    console.log('Getting CS with Key:',key);
-    
+  getCleanSweep(key: string) {
+    console.log('Getting CS with Key:', key);
+
     this.ds.getCleanSweep(key);
   }
 

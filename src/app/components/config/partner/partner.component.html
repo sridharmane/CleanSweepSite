@@ -1,0 +1,27 @@
+<md-toolbar color="primary">
+    <span>Partner</span>
+</md-toolbar>
+<form [formGroup]="addPartnerForm" (ngSubmit)="addPartner(addPartnerForm.value)">
+    <md-card>
+        <md-card-content>
+            <div class="form-row">
+                <md-input placeholder="Partner Name" align="middle" formControlName="name" class="form-input"></md-input>
+                <md-select placeholder="Partner Category" formControlName="category" class="form-input">
+                    <md-option *ngFor="let pc of partnerCategories | async" [value]="pc.$value"> {{ pc.$value }} </md-option>
+                </md-select>
+            </div>
+            <div class="form-row form-row-keys" formArrayName="keys">
+                <div *ngFor="let key of keys.controls; let i = index" [formGroupName]="i" md-line>
+                    <button md-icon-button (click)="addKey()" *ngIf="i===0"><md-icon>add_circle</md-icon></button>
+                    <button md-icon-button (click)="removeKey(i)" color="danger" *ngIf="i>0"><md-icon>remove_circle_outline</md-icon></button>
+                    <md-input placeholder="Key Abbreviation" formControlName="name" class="form-input"></md-input>
+                    <md-input placeholder="Key Full Form" formControlName="nameFull" class="form-input"></md-input>
+                </div>
+            </div>
+        </md-card-content>
+        <md-card-actions>
+            <button md-raised-button color="primary" type="submit" [disabled]="!addPartnerForm.valid">ADD</button>
+            <button md-button color="warn" type="reset" (click)="cancelAddForm()">CANCEL</button>
+        </md-card-actions>
+    </md-card>
+</form>

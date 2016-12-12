@@ -13,14 +13,13 @@
         <md-input placeholder="Email" formControlName="email"></md-input><br />
         <md-input type="password" placeholder="Password" formControlName="password"></md-input>
         <md-input type="password" placeholder="Confirm Password" formControlName="passwordConfirm"></md-input>
+        <br />
+        <label>Account Type</label>
+        <md-radio-group formControlName="type">
+          <md-radio-button value="admin">Admin</md-radio-button>
+          <md-radio-button value="manager">Manager</md-radio-button>
+        </md-radio-group>
       </section>
-    </md-card-content>
-    <md-card-subtitle>Account Type</md-card-subtitle>
-    <md-card-content>
-      <md-radio-group formControlName="type">
-        <md-radio-button value="admin">Admin</md-radio-button>
-        <md-radio-button value="manager">Manager</md-radio-button>
-      </md-radio-group>
     </md-card-content>
 
     <span class="error" *ngIf="errorMessage">{{errorMessage}}</span>

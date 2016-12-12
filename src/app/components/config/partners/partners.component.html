@@ -1,0 +1,53 @@
+<md-card>
+  <md-toolbar color="secondary">
+    <span>Partners</span>
+    <span class="fill-remaining-space"></span>
+    <button md-icon-button color="primary" (click)="showPartnerDialog()">
+          <md-icon>add</md-icon>
+        </button>
+  </md-toolbar>
+  <!--<md-card-content *ngIf="showForm">
+    <form [formGroup]="addPartnerForm" (ngSubmit)="addPartner(addPartnerForm.value)">
+      <div class="form-row">
+        <md-input placeholder="Partner Name" align="middle" formControlName="name" class="form-input"></md-input>
+        <md-select placeholder="Partner Category" formControlName="category" class="form-input">
+          <md-option *ngFor="let pc of partnerCategories | async" [value]="pc.$value"> {{ pc.$value }} </md-option>
+        </md-select>
+      </div>
+      <div class="form-row form-row-keys" formArrayName="keys">
+        <div *ngFor="let key of keys.controls; let i = index" [formGroupName]="i" md-line>
+          <button md-icon-button (click)="addKey()" *ngIf="i===0"><md-icon>add_circle</md-icon></button>
+          <button md-icon-button (click)="removeKey(i)" color="danger" *ngIf="i>0"><md-icon>remove_circle_outline</md-icon></button>
+          <md-input placeholder="Key Abbreviation" formControlName="name" class="form-input"></md-input>
+          <md-input placeholder="Key Full Form" formControlName="nameFull" class="form-input"></md-input>
+        </div>
+      </div>
+      <div class="form-row">
+        <button md-raised-button color="primary" type="submit" [disabled]="!addPartnerForm.valid">ADD</button>
+        <button md-button color="warn" (click)="cancelAddForm()">CANCEL</button>
+      </div>
+    </form>
+    <br />
+    <md-divider></md-divider>
+  </md-card-content>-->
+  <md-card-content>
+    <md-list dense>
+      <!--<div *ngFor="let category of partners | partnerCategories">-->
+      <div *ngFor="let category of partners | async | partnerCategories">
+        <h3 md-subheader class="category">{{category.name}}</h3>
+        <md-list-item *ngFor="let partner of category.partners">
+          <h3 md-line class="partner-name"> {{partner.name}} </h3>
+          <!--<p md-line class="partner-keys" [innerHtml]="partner.keys | partnerKeys:'i'"></p>-->
+          <p md-line class="partner-keys">{{partner.keys | partnerKeys:'i'}}</p>
+          <button md-icon-button class="accent" (click)="editPartner($key)">
+            <md-icon class="accent">edit</md-icon>
+          </button>
+          <button md-icon-button color="warn" (click)="deletePartner($key)">
+            <md-icon color="warn">delete</md-icon>
+          </button>
+        </md-list-item>
+        <md-divider></md-divider>
+      </div>
+    </md-list>
+  </md-card-content>
+</md-card>

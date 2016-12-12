@@ -4,9 +4,65 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 // import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { Partner } from '../types/partner';
 import { UserData } from '../types/user-data';
-import {Subject} from 'rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
 
 const PAGINATION_SIZE = 2;
+
+@Injectable()
+class FBUser {
+  _userObj: FirebaseObjectObservable<any>;
+  user: any;
+
+  constructor(private af: AngularFire, private uid: string) {
+    this._userObj = this.af.database.object('/users');
+    this._userObj.subscribe(user => {
+      this.user = user;
+    });
+  }
+
+  // Name
+  public get name(): string | null {
+    if (this.user) {
+      return this.user[this.uid].name;
+    }
+    return null;
+  }
+  public set name(name: string) {
+    this._userObj.set({
+      name: name
+    });
+  }
+
+  // Email
+  public get email(): string | null {
+    if (this.user) {
+      return this.user[this.uid].email;
+    }
+    return null;
+
+  }
+  public set email(email: string) {
+    this._userObj.set({
+      email: email
+    });
+  }
+
+  public get type(): string | null {
+    if (this.user) {
+      return this.user[this.uid].type;
+    }
+    return null;
+  }
+  public set type(type: string) {
+    this._userObj.set({
+      type: type
+    });
+  }
+
+
+
+
+}
 
 @Injectable()
 export class DataService {
@@ -85,8 +141,13 @@ export class DataService {
     });
   }
 
-  getUserDetails(userId: string) {
-    this.user = this.af.database.object('/users/', userId);
+  getUserDetails(uid: string): FirebaseObjectObservable<any> {
+    console.log('Getting user with uid:', uid);
+
+    this.user = this.af.database.object('/users/', uid);
+
+    let user = new FBUser(this.af, uid);
+    console.log('USER', user);
     return this.user;
   }
   setUserDetails(userData: UserData) {

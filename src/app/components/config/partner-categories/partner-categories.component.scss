@@ -13,3 +13,12 @@
   // Every toolbar row uses a flexbox row layout.
   flex: 1 1 auto;
 }
+md-card{
+    min-width: 350px;
+    max-width: 80%;
+    margin: 16px auto;
+    padding: 0;
+    md-card-content{
+        padding: 24px;
+    }
+}

@@ -5,8 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-clean-sweeps',
-  templateUrl: 'clean-sweeps.component.html',
-  styleUrls: ['clean-sweeps.component.scss'],
+  templateUrl: './clean-sweeps.component.html',
+  styleUrls: ['./clean-sweeps.component.scss'],
   animations: [
     trigger('showHideTrigger', [
       state('in', style({ height: '*' })),

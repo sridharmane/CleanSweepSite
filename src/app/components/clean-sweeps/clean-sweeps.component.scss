@@ -16,7 +16,14 @@
   }
 }
 .fab{
-  position: fixed;
-  top: 32px;
+  position: absolute;
+  bottom: 32px;
   right: 32px;
+}
+.test{
+  background-color: green;
+}
+md-tab-body-wrapper{
+  padding: 16px;
+   background-color: red;
 }
