@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CleanSweep } from '../types/clean-sweep';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 // import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import { Partner } from '../types/partner';
+import { IPartner } from '../types/partner';
 import { UserData } from '../types/user-data';
 import { Subject } from 'rxjs/Subject';
 
@@ -113,15 +113,7 @@ export class DataService {
     // console.log('New List', this.cleanSweeps);
 
   }
-  addPartner(pd: Partner) {
-    pd.keys.push({
-      name: 'notes',
-      name_full: 'notes',
-      visible: false
-    });
-    this.partners.push(pd);
-    console.log(pd);
-  }
+
   addPartnerCategory(pc: string) {
     this.partnerCategories.push(pc);
   }

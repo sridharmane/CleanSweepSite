@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../services/data.service';
-import { Partner } from '../../../types';
+import { IPartner } from '../../../types';
 
 @Component({
   selector: 'app-partner-categories',

@@ -30,6 +30,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { LoginComponent } from './components/login';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { OverlaySpinnerComponent } from './components/overlay-spinner';
+import { DialogsModule } from './components/dialogs';
 
 /**
  * Services 
@@ -44,10 +45,6 @@ import { DateTimeService } from './services/date-time.service';
  * Pipes 
  * */
 import { PipesModule } from './pipes/pipes.module';
-/**
- * Directives 
- * */
-
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 // import { Ng2MaterialModule, MdBackdropModule, Ng2MaterialNodeModule } from 'ng2-material';
@@ -65,14 +62,7 @@ const myFirebaseAuthConfig = {
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    PageNotFoundComponent,
-    LoginComponent,
-    RegistrationComponent,
-    OverlaySpinnerComponent
-  ],
+
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
@@ -82,8 +72,17 @@ const myFirebaseAuthConfig = {
     AngularFireModule.initializeApp(firebaseAppConfig, myFirebaseAuthConfig),
     CleanSweepsModule,
     ConfigModule,
-    // Pipes
     PipesModule,
+    DialogsModule,
+  ],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    PageNotFoundComponent,
+    LoginComponent,
+    RegistrationComponent,
+    OverlaySpinnerComponent,
+    // DialogsModule
   ],
   providers: [
     AuthGuardService,

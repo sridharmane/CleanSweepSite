@@ -2,7 +2,7 @@
   <md-toolbar color="secondary">
     <span>Partners</span>
     <span class="fill-remaining-space"></span>
-    <button md-icon-button color="primary" (click)="showPartnerDialog()">
+    <button md-icon-button color="primary" appDialogs dialogType="partner" dialogMode="add">
           <md-icon>add</md-icon>
         </button>
   </md-toolbar>
@@ -39,10 +39,11 @@
           <h3 md-line class="partner-name"> {{partner.name}} </h3>
           <!--<p md-line class="partner-keys" [innerHtml]="partner.keys | partnerKeys:'i'"></p>-->
           <p md-line class="partner-keys">{{partner.keys | partnerKeys:'i'}}</p>
-          <button md-icon-button class="accent" (click)="editPartner($key)">
+          <!--<button md-icon-button class="accent" appDialog (click)="editPartner(partner.$key)">-->
+          <button md-icon-button appDialogs dialogType="partner" dialogMode="edit">
             <md-icon class="accent">edit</md-icon>
           </button>
-          <button md-icon-button color="warn" (click)="deletePartner($key)">
+          <button md-icon-button color="warn" appDialogs dialogType="partner" dialogMode="delete">
             <md-icon color="warn">delete</md-icon>
           </button>
         </md-list-item>

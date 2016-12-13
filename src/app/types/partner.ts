@@ -1,6 +1,6 @@
-import {PartnerKey} from './partner-key';
+import { PartnerKey } from './partner-key';
 
-export interface Partner {
+export interface IPartner {
   name: string;
   category: string;
   keys: PartnerKey[];

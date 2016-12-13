@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../services/data.service';
+import { AngularFire } from 'angularfire2';
 import { PartnerComponent } from '../partner';
-import { Partner } from '../../../types';
+import { IPartner } from '../../../types';
 import { FirebaseListObservable } from 'angularfire2';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
@@ -23,6 +24,7 @@ export class PartnersComponent {
   keys: FormArray;
 
   constructor(
+    private af: AngularFire,
     private ds: DataService,
     private fb: FormBuilder,
     private dialog: MdDialog
@@ -38,20 +40,6 @@ export class PartnersComponent {
     });
   }
 
-  showPartnerDialog() {
-    this.dialogRef = this.dialog.open(PartnerComponent);
-  }
-
-  addPartner(partner: Partner) {
-    console.log(partner);
-    this.ds.addPartner(partner);
-  }
-  updatePartner(partnerId: string) {
-    // this.ds.updatePartner(partnerId);
-  }
-  deletePartner(partnerId: string) {
-    // this.ds.deletePartner(partnerId);
-  }
 
 
   buildKey() {
@@ -84,5 +72,6 @@ export class PartnersComponent {
     this.addPartnerForm.reset();
     this.showForm = false;
   }
+
 
 }

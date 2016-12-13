@@ -1,7 +1,7 @@
-import {Partner} from './partner';
+import { IPartner } from './partner';
 
-import {Street} from './street';
-import {StreetAddress} from './street-address';
+import { Street } from './street';
+import { StreetAddress } from './street-address';
 
 
 export interface CleanSweepData {
@@ -12,7 +12,7 @@ export interface CleanSweepData {
     accessCode?: string;
     streets: Street[];
     streetAddresses?: StreetAddress[];
-    partners?: Partner[];
+    partners?: IPartner[];
 }
 export class CleanSweep {
     number: string;
@@ -22,7 +22,7 @@ export class CleanSweep {
     accessCode: string;
     streets: Street[];
     streetAddresses: StreetAddress[];
-    partners: Partner[];
+    partners: IPartner[];
 
     constructor(csd?: CleanSweepData) {
         this.date = csd.date;

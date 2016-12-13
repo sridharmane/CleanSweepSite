@@ -1,7 +1,7 @@
 <md-toolbar color="primary">
-    <span>Partner</span>
+    <span>{{getMode() }} Partner</span>
 </md-toolbar>
-<form [formGroup]="addPartnerForm" (ngSubmit)="addPartner(addPartnerForm.value)">
+<form [formGroup]="partnerForm">
     <md-card>
         <md-card-content>
             <div class="form-row">
@@ -20,8 +20,11 @@
             </div>
         </md-card-content>
         <md-card-actions>
-            <button md-raised-button color="primary" type="submit" [disabled]="!addPartnerForm.valid">ADD</button>
-            <button md-button color="warn" type="reset" (click)="cancelAddForm()">CANCEL</button>
+            <button md-raised-button color="primary" (click)="add(partnerForm.value)" *ngIf="mode==='add'" [disabled]="!partnerForm.valid">ADD</button>
+            <button md-raised-button color="primary" (click)="update(partnerForm.value)" *ngIf="mode==='edit'" [disabled]="!partnerForm.valid">UPDATE</button>
+            <button md-raised-button color="primary" (click)="delete(partnerForm.value)" *ngIf="mode==='delete'" [disabled]="!partnerForm.valid">DELETE</button>
+            <button md-button color="warn" type="reset" (click)="cancel()">CANCEL</button>
         </md-card-actions>
     </md-card>
+    <br /> {{partnerForm.value | json}}
 </form>
